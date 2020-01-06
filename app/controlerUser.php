@@ -28,7 +28,7 @@ function  ctlUserInicio(){
                 else {
                   // Usuario normal
                   $_SESSION['modo'] = GESTIONFICHEROS;
-                    header('Location:index.php?orden=VerFicheros');
+                    header('Location:index.php');
                 }
             }
             else {
@@ -36,8 +36,12 @@ function  ctlUserInicio(){
            }  
         }
     }
-    
     include_once 'plantilla/facceso.php';
+    if (isset($_SESSION['mensaje'])){
+        $msg =$_SESSION['mensaje'];
+        header( "refresh:10; url=index.php?orden=Cerrar" );
+    }
+
 }
 
 // Cierra la sesión y vuelva los datos
