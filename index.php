@@ -22,7 +22,20 @@ $rutasUser = [
 ];
 // Si no hay usuario a Inicio
 if (!isset($_SESSION['user'])) {
+    if(isset($_GET['orden'])){
+        if (isset ($rutasUser[$_GET['orden']])) {
+                $procRuta = $rutasUser[$_GET['orden']];
+        } else {
+            // Error no existe función para la ruta
+            header('Status: 404 Not Found');
+            echo '<html><body><h1>Error 404: No existe la ruta <i>' .
+                $_GET['ctl'] .
+                '</p></body></html>';
+            exit;
+        }
+    }else{
     $procRuta = "ctlUserInicio";
+    }
 } else {
     if ($_SESSION['modo'] == GESTIONUSUARIOS) {
         if (isset($_GET['orden'])) {
@@ -40,7 +53,7 @@ if (!isset($_SESSION['user'])) {
         } else {
             $procRuta = "ctlUserVerUsuarios";
         }
-    } // Usuario Normal PRIMERA VERSION SIN ACCIONES
+    }
     else {
         $procRuta = "ctlUserInicio";
     }

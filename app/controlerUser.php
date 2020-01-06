@@ -26,11 +26,9 @@ function  ctlUserInicio(){
                     header('Location:index.php?orden=VerUsuarios');
                 }
                 else {
-                  // Usuario normal;
-                  // PRIMERA VERSIÓN SOLO USUARIOS ADMISTRADORES
-                  $msg="Error: Acceso solo permitido a usuarios Administradores.";
-                  // $_SESSION['modo'] = GESTIONFICHEROS;
-                  // Cambio de modo y redireccion a verficheros
+                  // Usuario normal
+                  $_SESSION['modo'] = GESTIONFICHEROS;
+                    header('Location:index.php?orden=VerFicheros');
                 }
             }
             else {
@@ -79,7 +77,12 @@ function ctlUserAlta(){
                 if(!$resultado){
                     $msg="El usuario o el correo electrónico facilitado ya existen";
                 }else{
-                    header('Location:index.php?orden=VerUsuarios');
+                    if(!isset($_SESSION['user'])){
+                        $msg="Gracias por registrarse. Esperando activación por parte del administrador";
+                        header( "refresh:10; url=index.php?orden=Cerrar" );
+                    }else {
+                        header('Location:index.php?orden=VerUsuarios');
+                    }
                 }
             }
             }
