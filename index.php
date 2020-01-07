@@ -25,7 +25,9 @@ $rutasFiles =[
   "Borrar"=> "ctlFileBorrar",
   "Renombrar"=>"ctlFileRenombrar",
   "Compartir"=>"ctlFileCompartir",
-  "Subir"=>"ctlFileSubir"
+  "Subir"=>"ctlFileSubir",
+  "Cerrar"=> "ctlFIleCerrar",
+  "Modificar" =>"ctlFileModificar"
 ];
 // Si no hay usuario a Inicio
 if (!isset($_SESSION['user'])) {

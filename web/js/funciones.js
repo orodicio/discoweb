@@ -7,7 +7,12 @@ function confirmarBorrar(nombre,id){
    document.location.href="?orden=Borrar&id="+id;
   }
 }
-
+function confirmarBorrarArchivo(nombre){
+    if (confirm("¿Quieres eliminar el archivo:  "+nombre+"?"))
+    {
+        document.location.href="?orden2=Borrar";
+    }
+}
 function comprobarContrasenas(clave){
     var expr2 =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&()=])([A-Za-z\d$@$!%*?&()=]|[^ ]){8,15}$/;
     if( clave == null || clave.length === 0 || !(expr2.test(clave))){

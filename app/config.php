@@ -5,6 +5,7 @@ define ('GESTIONFICHEROS','2');
 
 // Fichero donde se guardan los datos
 define('FILEUSER','app/dat/usuarios.json');
+define('USUARIO', 'app/dat/fich_usuarios/');
 // Ruta donde se guardan los archivos de los usuarios
 // Tiene que tener permiso 777 o permitir a Apache rwx
 define('RUTA_FICHEROS','/home/alumno/dirpruebas');
