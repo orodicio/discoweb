@@ -11,6 +11,7 @@ include_once 'validacionServidor.php';
  */
 
 function  ctlUserInicio(){
+
     $msg = "";
     $user ="";
     $clave ="";
@@ -26,22 +27,22 @@ function  ctlUserInicio(){
                     header('Location:index.php?orden=VerUsuarios');
                 }
                 else {
-                  // Usuario normal
-                  $_SESSION['modo'] = GESTIONFICHEROS;
+                    $estado =$_SESSION['tusuarios'][$user][4];
+                    if ($estado  == 'I'){
+                        $_SESSION['modo'] = GESTIONUSUARIOS;
+                        $msg = "Su usuario no ha sido activado. Pruebe en las próximas horas.";
+                        header( "refresh:5; url=index.php?orden=Cerrar" );
+                    }else{
+                   $_SESSION['modo'] = GESTIONFICHEROS;
                     header('Location:index.php');
+                    }
                 }
-            }
-            else {
+            } else {
                 $msg="Error: usuario y contraseña no válidos.";
            }  
         }
     }
     include_once 'plantilla/facceso.php';
-    if (isset($_SESSION['mensaje'])){
-        $msg =$_SESSION['mensaje'];
-        header( "refresh:10; url=index.php?orden=Cerrar" );
-    }
-
 }
 
 // Cierra la sesión y vuelva los datos
@@ -85,7 +86,7 @@ function ctlUserAlta(){
                         $msg="Gracias por registrarse. Esperando activación por parte del administrador";
                         header( "refresh:10; url=index.php?orden=Cerrar" );
                     }else {
-                        header('Location:index.php?orden=VerUsuarios');
+                        header('Location:index.php?orden2=VerUsuarios');
                     }
                 }
             }

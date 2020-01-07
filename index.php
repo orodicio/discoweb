@@ -4,7 +4,7 @@ include_once 'app/config.php';
 include_once 'app/controlerFile.php';
 include_once 'app/controlerUser.php';
 include_once 'app/modeloUser.php';
-
+include_once 'app/modeloFile.php';
 // Inicializo el modelo
 modeloUserInit();
 
@@ -61,10 +61,10 @@ if (!isset($_SESSION['user'])) {
             $procRuta = "ctlUserVerUsuarios";
         }
     } else {
-        if (isset($_GET['orden'])) {
+      if (isset($_GET['orden2'])) {
             // La orden tiene una funcion asociada
-            if (isset ($rutasFiles[$_GET['orden']])) {
-                $procRuta = $rutasFiles[$_GET['orden']];
+            if (isset ($rutasFiles[$_GET['orden2']])) {
+                $procRuta = $rutasFiles[$_GET['orden2']];
             } else {
                 // Error no existe función para la ruta
                 header('Status: 404 Not Found');
