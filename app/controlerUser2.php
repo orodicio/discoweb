@@ -1,3 +1,4 @@
+
 <?php
 // ------------------------------------------------
 // Controlador que realiza la gestión de usuarios
@@ -5,13 +6,10 @@
 include_once 'config.php';
 include_once 'modeloUser.php';
 include_once 'validacionServidor.php';
-
 /*
  * Inicio Muestra o procesa el formulario (POST)
  */
-
 function  ctlUserInicio(){
-
     $msg = "";
     $user ="";
     $clave ="";
@@ -27,91 +25,76 @@ function  ctlUserInicio(){
                     header('Location:index.php?orden=VerUsuarios');
                 }
                 else {
-                    $estado =$_SESSION['tusuarios'][$user][4];
-                    if ($estado  == 'I'){
-                        $_SESSION['modo'] = GESTIONUSUARIOS;
-                        $msg = "Su usuario no ha sido activado. Pruebe en las próximas horas.";
-                        header( "refresh:5; url=index.php?orden=Cerrar" );
-                    }else{
-                   $_SESSION['modo'] = GESTIONFICHEROS;
-                    header('Location:index.php');
-                    }
+                    // Usuario normal;
+                    // PRIMERA VERSIÓN SOLO USUARIOS ADMISTRADORES
+                    $msg="Error: Acceso solo permitido a usuarios Administradores.";
+                    // $_SESSION['modo'] = GESTIONFICHEROS;
+                    // Cambio de modo y redireccion a verficheros
                 }
-            } else {
+            }
+            else {
                 $msg="Error: usuario y contraseña no válidos.";
-           }  
+            }
         }
     }
+
     include_once 'plantilla/facceso.php';
 }
-
 // Cierra la sesión y vuelva los datos
 function ctlUserCerrar(){
     session_destroy();
     modeloUserSave();
     header('Location:index.php');
 }
-
 // Muestro la tabla con los usuario 
 function ctlUserVerUsuarios (){
     // Obtengo los datos del modelo
-    $usuarios = modeloUserGetAll(); 
+    $usuarios = modeloUserGetAll();
     // Invoco la vista 
     include_once 'plantilla/verusuariosp.php';
-   
+
 }
 function ctlUserAlta(){
-
     //Ingresar los datos al modelo.Muestro la vista de alta
-   if ($_SERVER['REQUEST_METHOD']=='POST'){
-
-    if(!empty($_POST)) {
-        $clave1 = recoge('clave1');
-        $clave2 = recoge('clave2');
-        $email = recoge('email');
-        $identificador = recoge('identificador');
-        $plan = recoge('plan');
-        $nombre = recoge('nombre');
-        $estado = 'I';
-        $mensaje = validarGeneral($clave1,$clave2,$email,$identificador,$nombre);
-        if(!empty($mensaje)) {
-            $msg=$mensaje;
-        }else{
+    if ($_SERVER['REQUEST_METHOD']=='POST'){
+        if(!empty($_POST)) {
+            $clave1 = recoge('clave1');
+            $clave2 = recoge('clave2');
+            $email = recoge('email');
+            $identificador = recoge('identificador');
+            $plan = recoge('plan');
+            $nombre = recoge('nombre');
+            $estado = 'I';
+            $mensaje = validarGeneral($clave1,$clave2,$email,$identificador,$nombre);
+            if(!empty($mensaje)) {
+                $msg=$mensaje;
+            }else{
                 $datos = [$clave1,$nombre,$email,$plan,$estado];
                 $resultado =modeloUserAdd($identificador,$datos);
                 if(!$resultado){
                     $msg="El usuario o el correo electrónico facilitado ya existen";
                 }else{
-                    if(!isset($_SESSION['user'])){
-                        $msg="Gracias por registrarse. Esperando activación por parte del administrador";
-                        header( "refresh:10; url=index.php?orden=Cerrar" );
-                    }else {
-                        header('Location:index.php?orden=VerUsuarios');
-                    }
+                    header('Location:index.php?orden=VerUsuarios');
                 }
             }
-            }
         }
-    include_once 'plantilla/fnuevo.php';
     }
-    function ctlUserDetalles(){
+    include_once 'plantilla/fnuevo.php';
+}
+function ctlUserDetalles(){
     if(!empty($_GET['id'])){
         $user =$_GET['id'];
         $tablaAmostrar=modeloUserGet($user);
     }else{
         $msg= "[ERROR] FALLO DE ENVÍO";
     }
-        include_once 'plantilla/detalles.php';
-
-
-    }
+    include_once 'plantilla/detalles.php';
+}
 function ctlUserBorrar(){
     modeloUserDel($_GET["id"]);
     header("Location: ".$_SERVER['PHP_SELF']);
 }
-
 function ctlUserModificar(){
-
     if($_SERVER['REQUEST_METHOD'] == "GET"){
         include_once 'plantilla/modificarusuario.php';
     }else{
@@ -127,7 +110,6 @@ function ctlUserModificar(){
         if(!empty($mensaje)) {
             $msg=$mensaje;
             include_once 'plantilla/modificarusuario.php';
-
         }else{
             $userdat = array();
             $userdat["password"] = $clave1;
@@ -135,7 +117,6 @@ function ctlUserModificar(){
             $userdat["estado"] = $estado;
             $userdat["plan"] = $plan ;
             $resultado = modeloUserUpdate($identificador,$userdat);
-
             if(!$resultado){
                 $msg="El usuario o el correo electrónico facilitado ya existen";
                 include_once 'plantilla/modificarusuario.php';
@@ -143,6 +124,5 @@ function ctlUserModificar(){
                 header('Location:index.php?orden=VerUsuarios');
             }
         }
-
     }
 }

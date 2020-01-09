@@ -4,7 +4,7 @@ include_once 'app/config.php';
 include_once 'app/controlerFile.php';
 include_once 'app/controlerUser.php';
 include_once 'app/modeloUser.php';
-include_once 'app/modeloFile.php';
+
 // Inicializo el modelo
 modeloUserInit();
 
@@ -26,8 +26,7 @@ $rutasFiles =[
   "Renombrar"=>"ctlFileRenombrar",
   "Compartir"=>"ctlFileCompartir",
   "Subir"=>"ctlFileSubir",
-  "Cerrar"=> "ctlFIleCerrar",
-  "Modificar" =>"ctlFileModificar"
+    "Modificar" => "ctlFileModificar"
 ];
 // Si no hay usuario a Inicio
 if (!isset($_SESSION['user'])) {
@@ -62,7 +61,8 @@ if (!isset($_SESSION['user'])) {
         } else {
             $procRuta = "ctlUserVerUsuarios";
         }
-    } else {
+    }
+    if ($_SESSION['modo'] == GESTIONFICHEROS) {
       if (isset($_GET['orden2'])) {
             // La orden tiene una funcion asociada
             if (isset ($rutasFiles[$_GET['orden2']])) {

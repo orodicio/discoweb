@@ -23,7 +23,7 @@ ob_start();
                 <option value="3">Master</option>
             </select><br><br>
             <input type="button" value="Enviar" onclick="validar()">
-            <input type="submit"  value="Cancelar" formaction="index.php?orden=VerUsuarios">
+            <input type="submit"  value="Cancelar" formaction="<?= (isset($_SESSION['user'])) ? "index.php?orden=VerUsuarios" : "index.php"?>">
         </fieldset>
     </form>
 <?php
