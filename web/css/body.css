@@ -11,8 +11,8 @@ body {
 
 #container {
     background: #fff;
-    border: solid 1px;
-    width: 40vw;
-    margin-left: 29vw;
-    margin-top: 20vh;
+    border: double 2px darkgoldenrod;
+    width: 93vw;
+    margin-left: 1vw;
+    margin-top: 5vh;
 }

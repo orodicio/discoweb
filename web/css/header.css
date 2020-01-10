@@ -1,25 +1,27 @@
 #header {
-    background: blue;
+    background: darkgoldenrod;
     text-align: center;
-    padding: 20px 20px 62px 20px;
+    padding: 20px 20px 20px 20px;
     color: white;
     text-shadow: black 0.1em 0.1em 0.2em;
 }
 
 #logo {
-    width: 8vw;
+    width: 43vw;
+    margin-left: 17vw;
+    margin-bottom: 2vh;
 }
 
 #logo>img {
-    max-width: 7vw;
+    width: 33vw;
 }
 
 #header h1 {
-    font-size: 36px;
+    font-size: 26px;
     font-family: disco;
-    width: 30vw;
-    margin-left: 7vw;
-    margin-top: -4vw;
+    width: 69vw;
+    margin-left: 5vw;
+    margin-top: 4vw;
 }
 
 #header h2 {

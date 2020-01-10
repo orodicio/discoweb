@@ -8,6 +8,7 @@
 <link href="web/css/default.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="web/css/body.css">
 <link rel="stylesheet" href="web/css/header.css">
+<link rel="stylesheet" href="web/css/footer.css">
 <script src="web/lib/jquery.js"></script>
 <script type="text/javascript" src="web/js/funciones.js"></script>
 </head>
@@ -20,6 +21,10 @@
 <div id="content">
 <?= $contenido ?>
 </div>
+</div>
+<div id="footer">
+<div id="copy"><p>Copyrigth:nuestracreaciones</p></div>
+<div id ="Nombres"><p>Creadores: Olalla Rodicio y Diego Camargo</p></div>
 </div>
 </body>
 </html>
