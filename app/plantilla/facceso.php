@@ -6,7 +6,7 @@
 ob_start();
 ?>
 <div id='aviso'><b><?= (isset($msg))?$msg:"" ?></b></div>
-<form name='ACCESO' method="POST" action="index.php">
+<form name='ACCESO' method="POST" action="index.php" class="enterForm">
 	<table>
 		<tr>
 			<td>Usuario</td>

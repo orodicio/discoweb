@@ -3,6 +3,7 @@ ob_start();
 
 ?>
     <div id='aviso'><b><?= (isset($msg))?$msg:"" ?></b></div>
+    <div id="tituloTabla"><h2>Ficheros del Usuario: <?=$_SESSION['user']?></h2></div>
     <table>
         <tr><th>Nombre</th>
             <th>Tipo</th>
@@ -16,7 +17,7 @@ ob_start();
         </tr>
             <?php foreach($justFiles as $archivo) : ?>
         <tr>
-            <td><?= $archivo ?></td>
+            <td> <a href="app/ficheros_usuarios/<?=$_SESSION['user'].'/'.$archivo?>" download="<?=$archivo?>"><?= $archivo ?></a></td>
             <td><?= mime_content_type(RUTA_FICHEROS.'/'.$_SESSION['user'].'/'.$archivo) ?></td>
             <td><?= filesize(RUTA_FICHEROS.'/'.$_SESSION['user'].'/'.$archivo).' bytes'?></td>
             <td><?= date("d/m/y H:i:s",filectime(RUTA_FICHEROS.'/'.$_SESSION['user'].'/'.$archivo))?></td>
@@ -29,12 +30,12 @@ ob_start();
     </table>
     <br>
     <form action='index.php' method="post">
-        <input type='submit' value='Cerrar Sesión' formaction="index.php?orden=Cerrar">
+        <input type='submit' value='Cerrar Sesión' formaction="index.php?orden2=Cerrar">
         <input type='submit' value='Modificar Datos' formaction="index.php?orden2=Modificar">
     </form>
-    <button onclick="mostrar()">Subir Fichero...</button>
+    <button id="mostrar">Subir Fichero...</button>
 
-    <div id="subida">
+    <div id="subida" style="visibility: hidden;">
     <form name="f1" enctype="multipart/form-data" action="index.php?orden2=Subir" method="post">
     <!--<input type="hidden" name="MAX_FILE_SIZE" value="100000" />  100Kbytes -->
     <label>Elija el archivo a subir</label> <input name="archivo1" type="file" required="required"/> <br />

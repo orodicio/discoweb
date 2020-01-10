@@ -26,6 +26,7 @@ $rutasFiles =[
   "Renombrar"=>"ctlFileRenombrar",
   "Compartir"=>"ctlFileCompartir",
   "Subir"=>"ctlFileSubir",
+    "Cerrar" => "ctlUserCerrar",
     "Modificar" => "ctlFileModificar"
 ];
 // Si no hay usuario a Inicio
