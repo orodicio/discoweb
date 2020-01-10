@@ -6,7 +6,7 @@
 ob_start();
 ?>
 <div id='aviso'><b><?= (isset($msg))?$msg:"" ?></b></div>
-<form name='ACCESO' method="POST" action="index.php">
+<form name='ACCESO' method="POST" action="index.php" class="enterForm">
 	<table>
 		<tr>
 			<td>Usuario</td>
@@ -22,7 +22,7 @@ ob_start();
     <br>
 	<input type="submit" name="orden" value="Entrar"><br><br>
 </form>
-<a href="#">Darse de alta como nuevo usuario</a>
+<a href="index.php?orden=Alta">Darse de alta como nuevo usuario</a>
 <?php 
 // Vacio el bufer y lo copio a contenido
 // Para que se muestre en div de contenido

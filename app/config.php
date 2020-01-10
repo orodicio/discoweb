@@ -7,7 +7,7 @@ define ('GESTIONFICHEROS','2');
 define('FILEUSER','app/dat/usuarios.json');
 // Ruta donde se guardan los archivos de los usuarios
 // Tiene que tener permiso 777 o permitir a Apache rwx
-define('RUTA_FICHEROS','/home/alumno/dirpruebas');
+define('RUTA_FICHEROS','app/ficheros_usuarios');
 
 // (0-Básico |1-Profesional |2- Premium| 3- Máster)
 const  PLANES = ['Básico','Profesional','Premium','Máster'];

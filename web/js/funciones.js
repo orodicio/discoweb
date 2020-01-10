@@ -1,13 +1,19 @@
 /**
  * Funciones auxiliares de javascripts 
  */
+$("document").ready(funcionesJquery);
 function confirmarBorrar(nombre,id){
   if (confirm("¿Quieres eliminar el usuario:  "+nombre+"?"))
   {
    document.location.href="?orden=Borrar&id="+id;
   }
 }
-
+function confirmarBorrarArchivo(nombre){
+    if (confirm("¿Quieres eliminar el archivo:  "+nombre+"?"))
+    {
+        document.location.href="?orden2=Borrar";
+    }
+}
 function comprobarContrasenas(clave){
     var expr2 =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&()=])([A-Za-z\d$@$!%*?&()=]|[^ ]){8,15}$/;
     if( clave == null || clave.length === 0 || !(expr2.test(clave))){
@@ -56,4 +62,18 @@ function validar(){
     }
     document.forms[0].action="index.php?orden=Alta"
     document.forms[0].submit(); //enviar datos al servidor
+}
+function funcionesJquery() {
+    $(".enterForm").keydown(enviarConEnter);
+    $("#mostrar").click(mostrar);
+
+    }
+function enviarConEnter() {
+    var key = e.which;
+    if (key == 13) {
+        $(".enterForm").submit();
+    }
+}
+function mostrar(){
+        $('#subida').css('visibility','visible');
 }

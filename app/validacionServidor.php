@@ -8,8 +8,8 @@ function recoge($var)
 
  function validarIdentificador($id){
     $resu="";
-    if(strlen($id)<5 ||strlen($id)>8 ){
-        $resu="la contraseña debe tener entre 5 y 8 caracteres";
+    if(strlen($id)<5 ||strlen($id)>10 ){
+        $resu="la contraseña debe tener entre 5 y 10 caracteres";
     }
     return $resu;
 }
