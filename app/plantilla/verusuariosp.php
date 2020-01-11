@@ -5,7 +5,7 @@ ob_start();
 
 ?>
 
-<table>
+<table id="verUsuarios">
 	<tr>
 <?php
 $auto = $_SERVER['PHP_SELF'];

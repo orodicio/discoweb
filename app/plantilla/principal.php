@@ -9,6 +9,11 @@
 <link rel="stylesheet" href="web/css/body.css">
 <link rel="stylesheet" href="web/css/header.css">
 <link rel="stylesheet" href="web/css/footer.css">
+<link rel="stylesheet" href="web/css/acceso.css">
+<link rel="stylesheet" href="web/css/modificarUsuarioAdmin.css">
+<link rel="stylesheet" href="web/css/nuevoUsuario.css">
+<link rel="stylesheet" href="web/css/verArchivos.css">
+<link rel="stylesheet" href="web/css/verusuarios.css">
 <script src="web/lib/jquery.js"></script>
 <script type="text/javascript" src="web/js/funciones.js"></script>
 </head>

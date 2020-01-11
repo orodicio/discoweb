@@ -8,7 +8,7 @@ if(isset($userid)){
 }
 ?>
 <div id='aviso'><b><?= (isset($msg)) ? $msg : "" ?></b></div>
-<form name='modificar' method="POST" action="index.php?orden=Modificar&id=<?= $userid ?>">
+<form name='modificar' method="POST" action="index.php?orden=Modificar&id=<?= $userid ?>" id="modificar">
 <table>
 	<tr>
 		<td>Identificador</td>

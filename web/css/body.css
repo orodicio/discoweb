@@ -14,7 +14,8 @@ section {
     border: double 2px darkgoldenrod;
     width: 93vw;
     margin-left: 0.5vw;
-    margin-top: 8vh;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
 }
 
 @media all and (min-width: 768px) {
@@ -23,7 +24,8 @@ section {
         border: double 2px darkgoldenrod;
         width: 60vw;
         margin-left: 18.5vw;
-        margin-top: 21vh;
+        margin-top: 7vh;
+        margin-bottom: 7vh;
     }
 }
 
@@ -33,6 +35,6 @@ section {
         border: double 2px darkgoldenrod;
         width: 40vw;
         margin-left: 28.5vw;
-        margin-top: 21vh;
+        margin-top: 10vh;
     }
 }

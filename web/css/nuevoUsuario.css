@@ -1,0 +1,21 @@
+#formularioNuevo {
+    text-align: left;
+    font-size: 4vw;
+    line-height: 7.5vw;
+}
+
+@media all and (min-width: 768px) {
+    #formularioNuevo {
+        text-align: left;
+        font-size: 2vw;
+        line-height: 3vw;
+    }
+}
+
+@media all and (min-width: 1024px) {
+    #formularioNuevo {
+        text-align: left;
+        font-size: 1vw;
+        line-height: 2vw;
+    }
+}

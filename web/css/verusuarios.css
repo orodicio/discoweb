@@ -1,0 +1,15 @@
+#verUsuarios {
+    font-size: 1.6vw;
+}
+
+@media all and (min-width: 768px) {
+    #verUsuarios {
+        font-size: 1.2vw;
+    }
+}
+
+@media all and (min-width: 1024px) {
+    #verUsuarios {
+        font-size: 0.8vw;
+    }
+}

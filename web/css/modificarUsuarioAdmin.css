@@ -1,0 +1,15 @@
+#modificar {
+    margin-left: 0vw;
+}
+
+@media all and (min-width: 768px) {
+    #modificar {
+        margin-left: 8vw;
+    }
+}
+
+@media all and (min-width: 1024px) {
+    #modificar {
+        margin-left: 4vw;
+    }
+}

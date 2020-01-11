@@ -1,0 +1,30 @@
+#subida {
+    visibility: hidden;
+    text-align: left;
+}
+
+.letraPeque {
+    font-size: 3.8vw;
+}
+
+#verArchivos {
+    font-size: 2.2vw;
+}
+
+@media all and (min-width: 768px) {
+    #verArchivos {
+        font-size: 1.4vw;
+    }
+    .letraPeque {
+        font-size: 1.8vw;
+    }
+}
+
+@media all and (min-width: 1024px) {
+    #verArchivos {
+        font-size: 0.8vw;
+    }
+    .letraPeque {
+        font-size: 0.8vw;
+    }
+}
