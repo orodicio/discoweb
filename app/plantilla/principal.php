@@ -13,18 +13,19 @@
 <script type="text/javascript" src="web/js/funciones.js"></script>
 </head>
 <body>
-<div id="container">
-<div id="header">
+<section>
+<header>
 <div id="logo"><img src="./web/img/boladiscoteca.png" alt="boladiscoteca"/></div>
 <h1>MI DISCO EN LA NUBE <span class="letratexto">versión 1.0</span></h1>
-</div>
-<div id="content">
+</header>
+<article>
 <?= $contenido ?>
-</div>
-</div>
-<div id="footer">
+</article>
+<footer>
 <div id="copy"><p>Copyrigth:nuestracreaciones</p></div>
-<div id ="Nombres"><p>Creadores: Olalla Rodicio y Diego Camargo</p></div>
-</div>
+<div id ="nombres"><p>Creadores: Olalla Rodicio y Diego Camargo</p></div>
+<div id="atribucion">Iconos diseñados por <a href="https://www.flaticon.es/autores/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></div>
+</footer>
+</section>
 </body>
 </html>

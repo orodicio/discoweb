@@ -1,9 +1,72 @@
-#footer {
+footer {
     color: white;
     background: darkgoldenrod;
-    text-align: center;
-    padding: 20px;
-    margin: 0px;
+    padding: 1vh;
     height: 1%;
-    font-size: 3vw;
+    font-size: 2vw;
+}
+
+#copy {
+    width: 28vw;
+    margin-top: 1.5vh;
+}
+
+#nombres {
+    width: 40vw;
+    margin-left: 51vw;
+    margin-top: -2.3vh;
+}
+
+#atribucion {
+    width: 47vw;
+    margin-left: 19vw;
+}
+
+@media all and (min-width: 768px) {
+    footer {
+        color: white;
+        background: darkgoldenrod;
+        padding: 0.5vw;
+        font-size: 1.5vw;
+    }
+    #copy {
+        width: 20vw;
+        margin-top: -2.5vh;
+    }
+    #nombres {
+        width: 30vw;
+        margin-left: 30vw;
+        margin-top: -4.3vh;
+    }
+    #atribucion {
+        width: 24vw;
+        margin-left: 16vw;
+        margin-top: -1vw;
+        font-size: 1vw;
+    }
+}
+
+@media all and (min-width: 1024px) {
+    footer {
+        color: white;
+        background: darkgoldenrod;
+        padding: 0.3vw 0.3vw 0.3vw 0vw;
+        font-size: 1vw;
+    }
+    #copy {
+        width: 13vw;
+        margin-top: -0.5vw;
+        margin-left: 2vw;
+    }
+    #nombres {
+        width: 20vw;
+        margin-left: 19vw;
+        margin-top: -2.1vw;
+    }
+    #atribucion {
+        width: 16vw;
+        margin-left: 12vw;
+        margin-top: -0.5vw;
+        font-size: 0.7vw;
+    }
 }

@@ -9,10 +9,30 @@ body {
     color: #757E82;
 }
 
-#container {
+section {
     background: #fff;
     border: double 2px darkgoldenrod;
     width: 93vw;
-    margin-left: 1vw;
-    margin-top: 5vh;
+    margin-left: 0.5vw;
+    margin-top: 8vh;
+}
+
+@media all and (min-width: 768px) {
+    section {
+        background: #fff;
+        border: double 2px darkgoldenrod;
+        width: 60vw;
+        margin-left: 18.5vw;
+        margin-top: 21vh;
+    }
+}
+
+@media all and (min-width: 1024px) {
+    section {
+        background: #fff;
+        border: double 2px darkgoldenrod;
+        width: 40vw;
+        margin-left: 28.5vw;
+        margin-top: 21vh;
+    }
 }

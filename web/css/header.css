@@ -1,4 +1,4 @@
-#header {
+header {
     background: darkgoldenrod;
     text-align: center;
     padding: 20px 20px 20px 20px;
@@ -16,15 +16,15 @@
     width: 33vw;
 }
 
-#header h1 {
-    font-size: 26px;
+header h1 {
+    font-size: 8vw;
     font-family: disco;
     width: 69vw;
     margin-left: 5vw;
     margin-top: 4vw;
 }
 
-#header h2 {
+header h2 {
     font-size: 20px;
     margin: 0;
 }
@@ -36,4 +36,64 @@
 @font-face {
     font-family: disco;
     src: url(../fuentes/DiscoDiva.ttf);
+}
+
+@media all and (min-width: 768px) {
+    header {
+        background: darkgoldenrod;
+        text-align: center;
+        padding: 0vw 1vw 0.5vw 7vw;
+        color: white;
+        text-shadow: black 0.1em 0.1em 0.2em;
+        ;
+    }
+    #logo {
+        width: 12vw;
+        margin-left: -2vw;
+        margin-bottom: 1.5vw
+    }
+    #logo>img {
+        width: 11vw;
+    }
+    header h1 {
+        font-size: 3.5vw;
+        font-family: disco;
+        width: 35vw;
+        margin-left: 12vw;
+        margin-top: -10vw;
+    }
+    .letratexto {
+        font-family: Tahoma, Geneva, sans-serif;
+        font-size: 2.5vw;
+    }
+}
+
+@media all and (min-width: 1024px) {
+    header {
+        background: darkgoldenrod;
+        text-align: center;
+        padding: 0vw 1vw 0.5vw 7vw;
+        color: white;
+        text-shadow: black 0.1em 0.1em 0.2em;
+        ;
+    }
+    #logo {
+        width: 10vw;
+        margin-left: -7vw;
+        margin-bottom: -3vw;
+    }
+    #logo>img {
+        width: 6vw;
+    }
+    header h1 {
+        font-size: 1.5vw;
+        font-family: disco;
+        width: 36vw;
+        margin-left: -2vw;
+        margin-top: 0vw;
+    }
+    .letratexto {
+        font-family: Tahoma, Geneva, sans-serif;
+        font-size: 1vw;
+    }
 }

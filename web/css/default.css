@@ -1,27 +1,25 @@
-#content {
+/*Elementos comunes*/
+
+article {
     background: white;
     clear: left;
-    padding: 20px;
+    padding: 2vh;
 }
 
-#content h2 {
+article h2 {
     color: #000;
     font-size: 160%;
     margin: 0 0 .5em;
 }
 
 #aviso {
-    background: white;
-    color: red;
+    background: red;
+    color: black;
+    width: 83vw;
 }
 
 li {
     padding: 18px;
-}
-
-#aviso {
-    background: red;
-    color: black;
 }
 
 a {
@@ -39,4 +37,113 @@ td {
     border: 1px solid black;
     border-collapse: collapse;
     padding: 4px;
+}
+
+
+/*From acceso*
+/*From acceso*
+/*From acceso*/
+
+#botones {
+    width: 45vw;
+    margin-left: 77px;
+    margin-bottom: 47px;
+    margin-top: 3px;
+}
+
+#nota {
+    width: 26vw;
+    margin-left: 66px;
+    margin-bottom: 0vw;
+    margin-top: -38px;
+}
+
+#nota img {
+    width: 31px;
+}
+
+#infonota {
+    visibility: hidden;
+    font-size: 2.5vw;
+    width: 15vw;
+    background: black;
+    color: white;
+    margin-top: -4vh;
+    margin-bottom: -7vh;
+    margin-left: 8vw;
+}
+
+#acceso {
+    margin-left: 0vw;
+    margin-top: 0;
+}
+
+@media all and (min-width: 768px) {
+    #aviso {
+        width: 58vw;
+    }
+    #botones {
+        width: 23vw;
+        margin-left: 11vw;
+        margin-bottom: 1vw;
+        margin-top: 1vw;
+    }
+    #nota {
+        width: 15vw;
+        margin-left: 10vw;
+        margin-top: -5.5vw;
+        margin-bottom: 1vw;
+    }
+    #nota img {
+        width: 4vw;
+    }
+    #infonota {
+        visibility: hidden;
+        font-size: 1.5vw;
+        width: 9vw;
+        background: black;
+        color: white;
+        margin-top: -5vh;
+        margin-bottom: 0vh;
+        margin-left: 3vw;
+    }
+    #acceso {
+        margin-left: 10vw;
+        margin-top: 3vw;
+    }
+}
+
+@media all and (min-width: 1024px) {
+    #aviso {
+        width: 37vw;
+    }
+    #botones {
+        width: 16vw;
+        margin-left: 69px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+    #nota {
+        width: 7vw;
+        margin-left: 70px;
+        margin-top: -41px;
+        margin-bottom: 0vw;
+    }
+    #nota img {
+        width: 33px;
+    }
+    #infonota {
+        visibility: hidden;
+        font-size: 14px;
+        width: 91px;
+        background: black;
+        color: white;
+        margin-top: -34px;
+        margin-bottom: 0vh;
+        margin-left: 34px;
+    }
+    #acceso {
+        margin-left: 70px;
+        margin-top: 18px;
+    }
 }
