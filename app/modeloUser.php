@@ -10,23 +10,11 @@ include_once 'config.php';
 */
 // Inicializo el modelo 
 // Cargo los datos del fichero a la session
-function modeloUserInit(){
-    
-    /*
-    $tusuarios = [ 
-         "admin"  => ["12345"      ,"Administrado"   ,"admin@system.com"   ,3,"A"],
-         "user01" => ["user01clave","Fernando Pérez" ,"user01@gmailio.com" ,0,"A"],
-         "user02" => ["user02clave","Carmen García"  ,"user02@gmailio.com" ,1,"B"],
-         "yes33" =>  ["micasa23"   ,"Jesica Rico"    ,"yes33@gmailio.com"  ,2,"I"]
-        ];
-    */
-    if (! isset ($_SESSION['tusuarios'] )){
+function loadUserFixture(){
+    if (isset ($_SESSION['tusuarios'] )) return;
     $datosjson = @file_get_contents(FILEUSER) or die("ERROR al abrir fichero de usuarios");
     $tusuarios = json_decode($datosjson, true);
     $_SESSION['tusuarios'] = $tusuarios;
-   }
-
-      
 }
 
 // Comprueba usuario y contraseña (boolean)
