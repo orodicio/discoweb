@@ -60,7 +60,7 @@ if(isset($userid)){
 		</td>
 	</tr>
 </table>
-<input type="submit" value="enviar">	<button><a href="index.php">Cancelar</a></button>
+<input type="submit" value="enviar">	<input type="submit"  value="Cancelar" formaction="index.php?orden=VerUsuarios">
 </form>
 <?php 
 $contenido = ob_get_clean();
