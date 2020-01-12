@@ -2,12 +2,13 @@
 
 // Guardo la salida en un buffer(en memoria)
 // No se envia al navegador
+//Formulario para nuevos usuarios
 ob_start();
 // FORMULARIO DE ALTA DE USUARIOS
 ?>
 
     <div id='aviso'><b><?= (isset($msg)) ? $msg : "" ?></b></div>
-    <form name='alta' method="post">
+    <form name='alta' method="post" id="formularioNuevo">
         <fieldset>
             <legend>Alta de usuario</legend>
             <label for="identificador">Identificador:</label><input type="text" name="identificador" id="identificador"><br>
@@ -23,7 +24,7 @@ ob_start();
                 <option value="3">Master</option>
             </select><br><br>
             <input type="button" value="Enviar" onclick="validar()">
-            <input type="submit"  value="Cancelar" formaction="index.php?orden=VerUsuarios">
+            <input type="submit"  value="Cancelar" formaction="<?= (isset($_SESSION['user'])) ? "index.php?orden=VerUsuarios" : "index.php"?>">
         </fieldset>
     </form>
 <?php

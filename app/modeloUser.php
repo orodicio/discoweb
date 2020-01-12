@@ -45,6 +45,7 @@ function modeloObtenerTipo($user){
 function modeloUserDel($user){
     if(array_key_exists($user,$_SESSION['tusuarios'])){
         unset($_SESSION['tusuarios'][$user]);
+        rmdir(RUTA_FICHEROS.'/'.$user );
         return true;
     }else{
         return false;
@@ -62,6 +63,7 @@ function modeloUserAdd($userid,$userdat){
 
     }
     $_SESSION['tusuarios'][$userid]=$userdat;
+     mkdir ( RUTA_FICHEROS.'/'.$userid ,0777 );
     return true;
 }
 
