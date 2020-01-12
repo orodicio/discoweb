@@ -76,6 +76,9 @@ function funcionesJquery() {
     $("#nota").mouseover(texto);
     $("#nota").mouseout(borrartexto);
     $("#verArchivos a, #verUsuarios a").hover(entramouse, salemouse);
+    $("input[type=text],input[type=password],input[type=email]").each(function() { $(this).hover(cambiaBorde, restauraBorde) });
+    $("input[type=submit],button,input[type=button]").each(function() { $(this).hover(cambiarFondo, restaurarFondo) });
+
 }
 
 function enviarConEnter() {
@@ -105,4 +108,20 @@ function entramouse() {
 
 function salemouse() {
     $(this).css('color', '#442299');
+}
+
+function cambiaBorde() {
+    $(this).css('border', '1px solid rgba(246, 153, 31, 0.883)');
+}
+
+function restauraBorde() {
+    $(this).css('border', '1px solid #757E82');
+}
+
+function cambiarFondo() {
+    $(this).addClass("cambiarBotones");
+}
+
+function restaurarFondo() {
+    $(this).removeClass("cambiarBotones");
 }
