@@ -1,4 +1,5 @@
 <?php
+//formulario para modificar usuarios del administrador
 ob_start();
 $userid =$_GET["id"];
 if(isset($userid)){

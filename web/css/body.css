@@ -1,3 +1,5 @@
+/*Estilo para el body y section*/
+
 body {
     background-attachment: fixed;
     background-position: center center;
@@ -11,7 +13,7 @@ body {
 
 section {
     background: #fff;
-    border: double 2px darkgoldenrod;
+    border: double 2px rgba(246, 153, 31, 0.883);
     width: 93vw;
     margin-left: 0.5vw;
     margin-top: 3vh;
@@ -21,7 +23,7 @@ section {
 @media all and (min-width: 768px) {
     section {
         background: #fff;
-        border: double 2px darkgoldenrod;
+        border: double 2px rgba(246, 153, 31, 0.883);
         width: 60vw;
         margin-left: 18.5vw;
         margin-top: 7vh;
@@ -32,9 +34,10 @@ section {
 @media all and (min-width: 1024px) {
     section {
         background: #fff;
-        border: double 2px darkgoldenrod;
+        border: double 2px rgba(246, 153, 31, 0.883);
         width: 40vw;
         margin-left: 28.5vw;
         margin-top: 10vh;
+        margin-bottom: 7vh;
     }
 }

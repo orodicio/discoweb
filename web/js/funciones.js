@@ -1,5 +1,6 @@
 /**
- * Funciones auxiliares de javascripts 
+ * Funciones auxiliares de javascript
+ *  e inicio del documento para las fuciones Jquery
  */
 $("document").ready(funcionesJquery);
 
@@ -64,12 +65,17 @@ function validar() {
     document.forms[0].action = "index.php?orden=Alta"
     document.forms[0].submit(); //enviar datos al servidor
 }
+/*Funciones Jquery
+/*Funciones Jquery
+/*Funciones Jquery
+/*Funciones Jquery*/
 
 function funcionesJquery() {
     $(".enterForm").keydown(enviarConEnter);
     $("#mostrar").click(mostrar);
     $("#nota").mouseover(texto);
     $("#nota").mouseout(borrartexto);
+    $("#verArchivos a, #verUsuarios a").hover(entramouse, salemouse);
 }
 
 function enviarConEnter() {
@@ -91,5 +97,12 @@ function texto() {
 function borrartexto() {
     $('#infonota').css('visibility', 'hidden');
 
+}
 
+function entramouse() {
+    $(this).css('color', 'rgba(246, 209, 160, 0.883)');
+}
+
+function salemouse() {
+    $(this).css('color', '#442299');
 }

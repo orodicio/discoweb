@@ -1,6 +1,6 @@
 <?php
 ob_start();
-
+//tabla para ver los archivos y subir nuevos archivos de los usuarios
 ?>
     <div id='aviso'><b><?= (isset($msg))?$msg:"" ?></b></div>
     <div id="tituloTabla"><h2>Ficheros del Usuario: <?=$_SESSION['user']?></h2></div>

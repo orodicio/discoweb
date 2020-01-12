@@ -1,9 +1,12 @@
+/*Estilo para el pie de página*/
+
 footer {
-    color: white;
-    background: darkgoldenrod;
+    color: #ffffff;
+    background-image: linear-gradient(-90deg, rgba(246, 153, 31, 0.883), rgba(246, 209, 160, 0.883), rgba(246, 153, 31, 0.883));
     padding: 1vh;
     height: 1%;
     font-size: 2vw;
+    text-shadow: #000000 0.1em 0.1em 0.2em;
 }
 
 #copy {
@@ -24,10 +27,11 @@ footer {
 
 @media all and (min-width: 768px) {
     footer {
-        color: white;
-        background: darkgoldenrod;
+        color: #ffffff;
+        background-image: linear-gradient(-90deg, rgba(246, 153, 31, 0.883), rgba(246, 209, 160, 0.883), rgba(246, 153, 31, 0.883));
         padding: 0.5vw;
         font-size: 1.5vw;
+        text-shadow: #000000 0.1em 0.1em 0.2em;
     }
     #copy {
         width: 20vw;
@@ -48,10 +52,11 @@ footer {
 
 @media all and (min-width: 1024px) {
     footer {
-        color: white;
-        background: darkgoldenrod;
+        color: #ffffff;
+        background-image: linear-gradient(-90deg, rgba(246, 153, 31, 0.883), rgba(246, 209, 160, 0.883), rgba(246, 153, 31, 0.883));
         padding: 0.3vw 0.3vw 0.3vw 0vw;
         font-size: 1vw;
+        text-shadow: #000000 0.1em 0.1em 0.2em;
     }
     #copy {
         width: 13vw;

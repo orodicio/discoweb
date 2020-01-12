@@ -2,6 +2,7 @@
 
 // Guardo la salida en un buffer(en memoria)
 // No se envia al navegador
+//Formulario para nuevos usuarios
 ob_start();
 // FORMULARIO DE ALTA DE USUARIOS
 ?>

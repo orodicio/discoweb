@@ -1,0 +1,58 @@
+/*Estilo de los elementos comunes*/
+
+article {
+    background: #ffffff;
+    clear: left;
+    padding: 2vh;
+}
+
+article h2 {
+    color: #000;
+    font-size: 160%;
+    margin: 0 0 .5em;
+}
+
+#aviso {
+    background: #ff0000;
+    color: #000000;
+    width: 83vw;
+}
+
+li {
+    padding: 18px;
+}
+
+a {
+    color: #442299;
+    text-decoration: none;
+}
+
+textarea {
+    resize: none;
+}
+
+table,
+th,
+td {
+    border: 1px solid #000000;
+    border-collapse: collapse;
+    padding: 4px;
+}
+
+input[type=text] {
+    border-radius: 3px;
+    border: 1px solid #757E82;
+    background-color: rgba(159, 161, 161, 0.116);
+}
+
+input[type=password] {
+    border-radius: 3px;
+    border: 1px solid #757E82;
+    background-color: rgba(159, 161, 161, 0.116);
+}
+
+input[type=email] {
+    border-radius: 3px;
+    border: 1px solid #757E82;
+    background-color: rgba(159, 161, 161, 0.116);
+}

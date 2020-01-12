@@ -2,6 +2,7 @@
 
 // Guardo la salida en un buffer(en memoria)
 // No se envia al navegador
+//Detalles no cuenta con hoja css: su estilo se consigue a través de las demás.
 ob_start();
 // DETALLES
 ?>

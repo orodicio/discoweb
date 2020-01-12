@@ -3,6 +3,7 @@
 <?php 
 // Guardo la salida en un buffer(en memoria)
 // No se envia al navegador
+//Contenido de la página de acceso.
 ob_start();
 ?>
 <div id='aviso'><b><?= (isset($msg))?$msg:"" ?></b></div>

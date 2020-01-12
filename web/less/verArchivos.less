@@ -1,0 +1,25 @@
+/*.less para crear el verArchivos.css*/
+@tam1:768px;
+@tam2:1024px;
+.media-all(@medida, @fuente){
+    @media all and (min-width:@medida){
+       font-size:@fuente; 
+    }  
+}
+#subida {
+    visibility: hidden;
+    text-align: left;
+}
+.letraPeque {
+    font-size:3.8vw;
+    .media-all(@tam1, 1.8vw);
+    .media-all(@tam2, 0.8vw);
+}
+#verArchivos{
+    font-size:2.2vw; 
+    .media-all(@tam1, 1.4vw);
+    .media-all(@tam2, 0.8vw);
+    }  
+
+
+

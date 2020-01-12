@@ -1,0 +1,31 @@
+/*.less para crear el body.css*/
+@tam1:768px;
+@tam2:1024px;
+.section(@p1,@p2,@p3,@p4){
+    background: #fff;
+    border:double 2px rgba(246, 153, 31, 0.883);
+    width:@p1;
+    margin-left:@p2;
+    margin-top:@p3;
+    margin-bottom: @p4;
+}
+.media-all(@medida,@p1,@p2,@p3,@p4){
+    @media all and (min-width:@medida){
+    .section(@p1,@p2,@p3,@p4);
+}
+}
+body {
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+    background-image: url("../img/discoteca.jpg");
+    text-align: justify;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    color: #757E82;
+}
+section {
+    .section(93vw,0.5vw,3vh,3vh);
+    .media-all(@tam1,60vw,18.5vw,7vh,7vh);
+    .media-all(@tam2,40vw,28.5vw,10vh,7vh);
+}
