@@ -1,10 +1,10 @@
 <?php
 ob_start();
-
+//tabla para ver los archivos y subir nuevos archivos de los usuarios
 ?>
     <div id='aviso'><b><?= (isset($msg))?$msg:"" ?></b></div>
     <div id="tituloTabla"><h2>Ficheros del Usuario: <?=$_SESSION['user']?></h2></div>
-    <table>
+    <table id="verArchivos">
         <tr><th>Nombre</th>
             <th>Tipo</th>
             <th>Tamaño</th>
@@ -33,12 +33,13 @@ ob_start();
         <input type='submit' value='Cerrar Sesión' formaction="index.php?orden2=Cerrar">
         <input type='submit' value='Modificar Datos' formaction="index.php?orden2=Modificar">
     </form>
+    <br>
     <button id="mostrar">Subir Fichero...</button>
-
-    <div id="subida" style="visibility: hidden;">
+    <br><br>
+    <div id="subida">
     <form name="f1" enctype="multipart/form-data" action="index.php?orden2=Subir" method="post">
     <!--<input type="hidden" name="MAX_FILE_SIZE" value="100000" />  100Kbytes -->
-    <label>Elija el archivo a subir</label> <input name="archivo1" type="file" required="required"/> <br />
+    <label>Elija el archivo a subir</label><br> <input name="archivo1" type="file" required="required" class="letraPeque"/> <br /><br>
     <input type="submit" value="Subir archivo" />
     </form>
     </div>

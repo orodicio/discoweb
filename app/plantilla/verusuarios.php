@@ -1,6 +1,7 @@
 <?php
 // Guardo la salida en un buffer(en memoria)
 // No se envia al navegador
+//Plantilla para que vea el adiministrador la tabla de usuarios
 ob_start();
 
 ?>

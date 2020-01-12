@@ -1,0 +1,13 @@
+/*.less para crear el verusuarios.css*/
+@tam1:768px;
+@tam2:1024px;
+.media-all(@medida, @fuente){
+    @media all and (min-width:@medida){
+       font-size:@fuente; 
+    }  
+}
+#verUsuarios{
+    font-size: 1.6vw;
+    .media-all(@tam1, 1.2vw);
+    .media-all(@tam2, 0.8vw);
+}

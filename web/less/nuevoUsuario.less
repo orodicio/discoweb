@@ -1,0 +1,18 @@
+/*.less para crear el nuevoUsuario.css*/
+@tam1:768px;
+@tam2:1024px;
+.formulario(@param1,@param2){
+    text-align: left;
+    font-size: @param1;
+    line-height: @param2;
+}
+.media-all(@medida, @param1,@param2){
+    @media all and (min-width:@medida){
+    .formulario(@param1,@param2);
+    }  
+}
+#formularioNuevo{
+    .formulario(4vw,7.5vw);
+    .media-all(@tam1, 2vw,3vw);
+    .media-all(@tam2, 1vw,2vw);
+}

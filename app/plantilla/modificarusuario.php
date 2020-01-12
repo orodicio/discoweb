@@ -1,4 +1,5 @@
 <?php
+//formulario para modificar usuarios del administrador
 ob_start();
 $userid =$_GET["id"];
 if(isset($userid)){
@@ -8,7 +9,7 @@ if(isset($userid)){
 }
 ?>
 <div id='aviso'><b><?= (isset($msg)) ? $msg : "" ?></b></div>
-<form name='modificar' method="POST" action="index.php?orden=Modificar&id=<?= $userid ?>">
+<form name='modificar' method="POST" action="index.php?orden=Modificar&id=<?= $userid ?>" id="modificar">
 <table>
 	<tr>
 		<td>Identificador</td>

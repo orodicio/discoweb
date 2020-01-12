@@ -2,12 +2,13 @@
 
 // Guardo la salida en un buffer(en memoria)
 // No se envia al navegador
+//Formulario para nuevos usuarios
 ob_start();
 // FORMULARIO DE ALTA DE USUARIOS
 ?>
 
     <div id='aviso'><b><?= (isset($msg)) ? $msg : "" ?></b></div>
-    <form name='alta' method="post">
+    <form name='alta' method="post" id="formularioNuevo">
         <fieldset>
             <legend>Alta de usuario</legend>
             <label for="identificador">Identificador:</label><input type="text" name="identificador" id="identificador"><br>

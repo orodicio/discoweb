@@ -1,0 +1,13 @@
+/*.less para crear el modificarUsuarioAdmin.css*/
+@tam1:768px;
+@tam2:1024px;
+.media-all(@medida, @margin){
+    @media all and (min-width:@medida){
+        margin-left:@margin; 
+    }  
+}
+#modificar{
+    margin-left:0vw;
+    .media-all(@tam1, 8vw);
+    .media-all(@tam2, 4vw); 
+}
