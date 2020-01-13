@@ -14,8 +14,8 @@ ob_start();
             <label for="identificador">Identificador:</label><input type="text" name="identificador" id="identificador"><br>
             <label for="nombre">Nombre y apellidos:</label><input type="text" name="nombre" id="nombre"><br>
             <label for="email">Correo electrónico</label><input type="email" name="email" id="email"><br>
-            <label for="clave1">Contraseña:</label><input type="password" name="clave1" id="clave1"><br>
-            <label for="clave2">Repita contraseña:</label><input type="password" name="clave2" id="clave2"><br>
+            <label for="clave1">Contraseña:</label><input type="password" name="clave1" id="clave1" required><br>
+            <label for="clave2">Repita contraseña:</label><input type="password" name="clave2" id="clave2" required><br>
             <label for="plan">Elige tu plan:</label><br>
             <select name="plan" size="3">
                 <option value="0" selected>Básico</option>
@@ -24,7 +24,7 @@ ob_start();
                 <option value="3">Master</option>
             </select><br><br>
             <input type="button" value="Enviar" onclick="validar()">
-            <input type="submit"  value="Cancelar" formaction="<?= (isset($_SESSION['user'])) ? "index.php?orden=VerUsuarios" : "index.php"?>">
+            <input type="submit"  value="Cancelar" formaction="<?= (isset($_SESSION['user'])) ? "index.php?orden=VerUsuarios" : "index.php"?>" formnovalidate>
         </fieldset>
     </form>
 <?php

@@ -30,14 +30,14 @@ ob_start();
     </table>
     <br>
     <form action='index.php' method="post">
-        <input type='submit' value='Cerrar Sesión' formaction="index.php?orden2=Cerrar">
-        <input type='submit' value='Modificar Datos' formaction="index.php?orden2=Modificar">
+        <input type='submit' value='Cerrar Sesión' formaction="index.php?orden2=Cerrar&orden=Cerrar">
+        <input type='submit' value='Modificar Datos' formaction="index.php?orden2=Modificar&orden=VerUsuarios">
     </form>
     <br>
     <button id="mostrar">Subir Fichero...</button>
     <br><br>
     <div id="subida">
-    <form name="f1" enctype="multipart/form-data" action="index.php?orden2=Subir" method="post">
+    <form name="f1" enctype="multipart/form-data" action="index.php?orden2=Subir&orden=Subir" method="post">
     <!--<input type="hidden" name="MAX_FILE_SIZE" value="100000" />  100Kbytes -->
     <label>Elija el archivo a subir</label><br> <input name="archivo1" type="file" required="required" class="letraPeque"/> <br /><br>
     <input type="submit" value="Subir archivo" />

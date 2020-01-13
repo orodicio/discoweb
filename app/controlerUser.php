@@ -5,7 +5,7 @@
 include_once 'config.php';
 include_once 'modeloUser.php';
 include_once 'validacionServidor.php';
-
+include_once 'cifrador.php';
 /*
  * Inicio Muestra o procesa el formulario (POST)
  */
@@ -77,14 +77,19 @@ function ctlUserAlta(){
         if(!empty($mensaje)) {
             $msg=$mensaje;
         }else{
+
                 $datos = [$clave1,$nombre,$email,$plan,$estado];
+                //echo'<pre>';
+                //var_dump($datos);
+                //echo'<pre>';
+                //exit();
                 $resultado =modeloUserAdd($identificador,$datos);
                 if(!$resultado){
                     $msg="El usuario o el correo electrónico facilitado ya existen";
                 }else{
                     if(!isset($_SESSION['user'])){
                         $msg="Gracias por registrarse. Esperando activación por parte del administrador";
-                        header( "refresh:10; url=index.php?orden=Cerrar" );
+                        header( "refresh:5; url=index.php?orden=Cerrar" );
                     }else {
                         header('Location:index.php?orden=VerUsuarios');
                     }
@@ -122,7 +127,6 @@ function ctlUserModificar(){
         $plan = recoge('plan');
         $nombre = "nosecambia";
         $estado = recoge('estado');
-        //echo $clave1.$email.$identificador.$plan.$estado.$clave2.$nombre;
         $mensaje = validarGeneral($clave1,$clave2,$email,$identificador,$nombre);
         if(!empty($mensaje)) {
             $msg=$mensaje;

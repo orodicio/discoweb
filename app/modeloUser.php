@@ -1,5 +1,6 @@
 <?php 
 include_once 'config.php';
+include_once 'cifrador.php';
 /* DATOS DE USUARIO
 • Identificador ( 5 a 10 caracteres, no debe existir previamente, solo letras y números)
 • Contraseña ( 8 a 15 caracteres, debe ser segura)
@@ -32,7 +33,7 @@ function modeloUserInit(){
 // Comprueba usuario y contraseña (boolean)
 function modeloOkUser($user,$clave){
     $mitabla = $_SESSION['tusuarios'];
-    return isset($mitabla[$user]) && $mitabla[$user][0]===$clave ;
+    return isset($mitabla[$user]) && Cifrador::verificar($clave, $mitabla[$user][0]);
 }
 
 // Devuelve el plan de usuario (String)
