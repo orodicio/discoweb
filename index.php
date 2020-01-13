@@ -9,26 +9,20 @@ include_once 'app/RoutesMapper.php';
 
 loadUserFixture();
 $routesMappper = new RoutesMapper();
+
+$order = $_GET['orden'] ?: $_GET['orden2'];
 // Si no hay usuario a Inicio
 if (!isset($_SESSION['user'])) {
-    $order = $_GET['orden'] ?: '';
-    $procRuta = $routesMappper::user($order);
-    $procRuta();
+    $routesMappper::user($order)->execute();
     exit;
 }
 
 if ($_SESSION['modo'] == GESTIONUSUARIOS) {
-    $order = $_GET['orden'] ?: '';
-    $procRuta = $routesMappper::user($order);
-    $procRuta();
+    $routesMappper::user($order)->execute();
     exit;
 }
 
 if ($_SESSION['modo'] == GESTIONFICHEROS) {
-    $order = $_GET['orden2'] ?: '';
-    $procRuta = $routesMappper::file($order);
-    $procRuta();
+    $routesMappper::file($order)->execute();
 }
-
-
 

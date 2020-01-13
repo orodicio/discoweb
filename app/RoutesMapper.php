@@ -23,23 +23,31 @@ class RoutesMapper
             "Modificar" => "ctlFileModificar"
         ],
         "error" => [
-            "404" => "notfound.php"
+            "404" => "ctlNotFound"
         ]
     ];
 
-    public static function user($route) {
-        if (empty($route)) return  self::$routes['user']['Inicio'];
+    public static function fetch($route) : Matcheable {
+        if (empty($route)) return  new Found(self::$routes['user']['Inicio']);
         if (!array_key_exists($route, self::$routes['user']))
-            return self::$routes['error']['404'];
+            return new NotFound(self::$routes['error']['404']);
 
-        return  self::$routes['user'][$route];
+        return  new Found(self::$routes['user'][$route]);
     }
 
-    public static function file($route) {
+    public static function user($route) : Matcheable {
+        if (empty($route)) return  new Found(self::$routes['user']['Inicio']);
+        if (!array_key_exists($route, self::$routes['user']))
+            return new NotFound(self::$routes['error']['404']);
+
+        return  new Found(self::$routes['user'][$route]);
+    }
+
+    public static function file($route) : Matcheable {
         if (empty($route)) return  self::$routes['files']['VerArchivos'];
         if (!array_key_exists($route, self::$routes['files']))
-            return self::$routes['error']['404'];
+            return new NotFound(self::$routes['error']['404']);
 
-        return  self::$routes['files'][$route];
+        return  new Found(self::$routes['files'][$route]);
     }
 }

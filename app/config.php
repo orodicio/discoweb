@@ -1,7 +1,9 @@
 <?php
 
+define ('ANONIMO', !isset($_SESSION['user']));
 define ('GESTIONUSUARIOS','1');
 define ('GESTIONFICHEROS','2');
+
 
 // Fichero donde se guardan los datos
 define('FILEUSER','app/dat/usuarios.json');
