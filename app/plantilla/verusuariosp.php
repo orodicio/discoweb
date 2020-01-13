@@ -5,6 +5,7 @@
 ob_start();
 
 ?>
+    <div id="botonArriba"><button><a href="index.php?orden=VerArchivos">Ver mis archivos</a></button></div>
 
 <table id="verUsuarios">
 	<tr>

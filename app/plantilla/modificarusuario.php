@@ -21,11 +21,11 @@ if(isset($userid)){
 	</tr>
 	<tr>
 		<td>Contraseña</td>
-		<td><input type="password" name="contrasenia" value="<?=$user[0]?>"></td>
+		<td><input type="password" name="contrasenia"></td>
 	</tr>
 	<tr>
 		<td>Repetir contraseña</td>
-		<td><input type="password" name="repcontrasenia" value="<?=$user[0]?>"></td>
+		<td><input type="password" name="repcontrasenia"></td>
 	</tr>
  	<tr>
 		<td>Estado</td>
