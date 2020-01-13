@@ -79,10 +79,6 @@ function ctlUserAlta(){
         }else{
 
                 $datos = [$clave1,$nombre,$email,$plan,$estado];
-                //echo'<pre>';
-                //var_dump($datos);
-                //echo'<pre>';
-                //exit();
                 $resultado =modeloUserAdd($identificador,$datos);
                 if(!$resultado){
                     $msg="El usuario o el correo electrónico facilitado ya existen";
