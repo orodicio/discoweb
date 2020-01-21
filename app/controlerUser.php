@@ -146,3 +146,13 @@ function ctlUserModificar(){
 
     }
 }
+function cltUserCambiarModo(){
+    if ($_SESSION['modo'] == GESTIONUSUARIOS) {
+        $_SESSION['modo'] = GESTIONFICHEROS;
+        header('Location:index.php');
+    }else{
+        $_SESSION['modo'] = GESTIONUSUARIOS;
+        $id=$_SESSION['user'];
+        header('Location:index.php?orden=Modificar&id='.$id);
+    }
+}
