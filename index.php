@@ -3,10 +3,10 @@ session_start();
 include_once 'app/config.php';
 include_once 'app/controlerFile.php';
 include_once 'app/controlerUser.php';
-include_once 'app/modeloUser.php';
-
+include_once 'app/ModeloUserDB.php';
 // Inicializo el modelo
-modeloUserInit();
+
+modeloUserDB::Init();
 
 // Enrutamiento
 // Relación entre peticiones y función que la va a tratar
@@ -18,12 +18,8 @@ $rutasUser = [
     "Modificar" => "ctlUserModificar",
     "Borrar" => "ctlUserBorrar",
     "Cerrar" => "ctlUserCerrar",
-    "VerArchivos" => "ctlFileVerArchivos",
     "VerUsuarios" => "ctlUserVerUsuarios",
-    "BorrarArchivo"=> "ctlFileBorrar",
-    "Renombrar"=>"ctlFileRenombrarArchivo",
-    "Compartir"=>"ctlFileCompartirArchvio",
-    "Subir"=>"ctlFileSubir"
+    "cambiarModo"=> "cltUserCambiarModo"
 ];
 $rutasFiles = [
     "VerArchivos" => "ctlFileVerArchivos",
@@ -32,7 +28,7 @@ $rutasFiles = [
     "Compartir" => "ctlFileCompartir",
     "Subir" => "ctlFileSubir",
     "Cerrar" => "ctlUserCerrar",
-    "Modificar" => "ctlFileModificar"
+    "cambiarModo"=> "cltUserCambiarModo"
 ];
 // Si no hay usuario a Inicio
 if (!isset($_SESSION['user'])) {

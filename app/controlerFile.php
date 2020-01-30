@@ -8,7 +8,9 @@ include_once 'config.php';
 
 // Muestro la tabla con los archivos
 function ctlFileVerArchivos (){
-
+    if (isset($_GET['msg'])) {
+        $msg = $_GET['msg'];
+    }
     $directorio = RUTA_FICHEROS.'/'.$_SESSION['user'];
     $justFiles = preg_grep('/^([^.])/',scandir($directorio));
 
