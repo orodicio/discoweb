@@ -3,7 +3,7 @@
 ob_start();
 $userid =$_GET["id"];
 if(isset($userid)){
-	$user = $_SESSION["tusuarios"][$userid];
+	$user =modeloUserDB::UserGet($userid);
 }else{
 	echo "fallooooo";
 }
@@ -17,7 +17,7 @@ if(isset($userid)){
 	</tr>
 		<tr>
 		<td>Correo electrónico</td>
-		<td><input type="text" name="correo" value="<?=$user[2]?>"></td>
+		<td><input type="text" name="correo" value="<?=$user[3]?>"></td>
 	</tr>
 	<tr>
 		<td>Contraseña</td>
@@ -27,13 +27,13 @@ if(isset($userid)){
 		<td>Repetir contraseña</td>
 		<td><input type="password" name="repcontrasenia"></td>
 	</tr>
- 	<tr>
+ 	<tr <?php if ($_SESSION['tipouser']!="Máster"){echo "hidden";}?>>
 		<td>Estado</td>
 		<td>
 			<select size="3" name="estado">
 				<?php
 					foreach(ESTADOS as $c => $v){
-						if($c == $user[4]){
+						if($c == $user[5]){
 							echo "<option selected='selected' value='$c'>$v</option>";
 						}else{
 							echo "<option value='$c'>$v</option>";
@@ -49,7 +49,7 @@ if(isset($userid)){
 			<select size="4" name="plan">
 				<?php
 					foreach(PLANES as $c => $v){
-						if($c == $user[3]){
+						if($c == $user[4]){
 							echo "<option selected='selected' value='$c'>$v</option>";
 						}else{
 							echo "<option value='$c'>$v</option>";
@@ -60,7 +60,7 @@ if(isset($userid)){
 		</td>
 	</tr>
 </table>
-<input type="submit" value="enviar">	<input type="submit"  value="Cancelar" formaction="index.php?orden=VerUsuarios">
+<input type="submit" value="enviar">	<input type="submit"  value="Cancelar" formaction="index.php?orden=<?=($_SESSION['tipouser']=="Máster")?'VerUsuarios': 'cambiarModo'?>">
 </form>
 <?php 
 $contenido = ob_get_clean();

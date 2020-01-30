@@ -9,11 +9,11 @@ ob_start();
 
 <div id='aviso'><b><?= (isset($msg)) ? $msg : "" ?></b></div>
 <h1>Detalles de <?=$user?></h1>
-<p>Nombre: <?=$tablaAmostrar[1]?></p>
-    <p>Contraseña: <?=$tablaAmostrar[0]?></p>
-    <p>Correo electrónico: <?=$tablaAmostrar[2]?></p>
-    <p>Tipo de plan: <?=PLANES[$tablaAmostrar[3]]?></p>
-    <p>Estado: <?=ESTADOS[$tablaAmostrar[4]]?></p>
+<p>Nombre: <?=$tablaAmostrar[2]?></p>
+    <p>Contraseña: <?=$tablaAmostrar[1]?></p>
+    <p>Correo electrónico: <?=$tablaAmostrar[3]?></p>
+    <p>Tipo de plan: <?=PLANES[$tablaAmostrar[4]]?></p>
+    <p>Estado: <?=ESTADOS[$tablaAmostrar[5]]?></p>
 <form method="get" action="index.php?orden=VerUsuarios">
     <input type="submit" value="volver">
 </form>

@@ -3,10 +3,10 @@ session_start();
 include_once 'app/config.php';
 include_once 'app/controlerFile.php';
 include_once 'app/controlerUser.php';
-include_once 'app/modeloUser.php';
-
+include_once 'app/ModeloUserDB.php';
 // Inicializo el modelo
-modeloUserInit();
+
+modeloUserDB::Init();
 
 // Enrutamiento
 // Relación entre peticiones y función que la va a tratar
