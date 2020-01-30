@@ -3,6 +3,7 @@ ob_start();
 //tabla para ver los archivos y subir nuevos archivos de los usuarios
 ?>
     <div id='aviso'><b><?= (isset($msg))?$msg:"" ?></b></div>
+<br>
     <div id="tituloTabla"><h2>Ficheros del Usuario: <?=$_SESSION['user']?></h2></div>
     <table id="verArchivos">
         <tr><th>Nombre</th>
@@ -31,7 +32,7 @@ ob_start();
     <br>
     <form action='index.php' method="post">
         <input type='submit' value='Cerrar Sesión' formaction="index.php?orden2=Cerrar">
-        <input type='submit' value='Modificar Datos' formaction="index.php?orden2=Modificar">
+        <input type='submit' value='Modificar Datos' formaction="index.php?orden2=cambiarModo">
     </form>
     <br>
     <button id="mostrar">Subir Fichero...</button>
