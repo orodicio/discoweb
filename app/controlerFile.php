@@ -10,6 +10,7 @@ include_once 'config.php';
 function ctlFileVerArchivos (){
     if (isset($_GET['msg'])) {
         $msg = $_GET['msg'];
+        header('refresh:5; url=index.php?orden2=VerArchivos');
     }
     $directorio = RUTA_FICHEROS.'/'.$_SESSION['user'];
     $justFiles = preg_grep('/^([^.])/',scandir($directorio));
@@ -48,10 +49,12 @@ function ctlFileSubir(){
                 //Intento mover el archivo temporal al directorio indicado
                 if (!move_uploaded_file($temporalFichero,  $directorioSubida .'/'. $nombreFichero)) {
                     $msg .= 'ERROR: Archivo no guardado correctamente <br />';
+                }else{
+                    $msg .= 'Archivo guardado correctamente <br />';
                 }
             } else {
                 $msg .= 'ERROR: No es un directorio correcto o no se tiene permiso de escritura <br />';
             }
         }
-    ctlFileVerArchivos ();
+         header('Location:index.php?orden2=VerArchivos&msg=' . $msg);
 }
