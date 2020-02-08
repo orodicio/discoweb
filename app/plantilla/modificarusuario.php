@@ -50,7 +50,7 @@ if(isset($userid)){
 	 	<tr>
 		<td>Plan</td>
 		<td>
-			<select size="4" name="plan">
+			<select size="4" name="plan" onchange="confirmarModificar('<?= PLANES[$user[4]]?>');">
 				<?php
 					foreach(PLANES as $c => $v){
 						if($c == $user[4]){

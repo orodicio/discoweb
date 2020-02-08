@@ -65,6 +65,11 @@ function validar() {
     document.forms[0].action = "index.php?orden=Alta"
     document.forms[0].submit(); //enviar datos al servidor
 }
+
+function confirmarModificar(plan){
+   alert('Si modifica su plan '+plan +' ,su usuario querará temporalmente bloqueado, a no ser que sea administrador');
+    return;
+}
 /*Funciones Jquery
 /*Funciones Jquery
 /*Funciones Jquery
