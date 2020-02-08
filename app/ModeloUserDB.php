@@ -121,14 +121,14 @@ class ModeloUserDB
         $stmt->bindValue(5, $user->plan);
         $stmt->bindValue(6, $user->estado);
         $result = $stmt->execute();
-        mkdir ( RUTA_FICHEROS.'/'.$user->id ,0777 );
+        mkdir(RUTA_FICHEROS . '/' . $user->id, 0777);
         return $result;
     }
 
 // Actualizar un nuevo usuario (boolean)
-    public static function UserUpdate($user):bool
+    public static function UserUpdate($user): bool
     {
-           if (empty($user->clave)) {
+        if (empty($user->clave)) {
             $stmt = self::$dbh->prepare("update Usuarios set email=?, plan=?, estado=? where id=?");
             $stmt->bindValue(1, $user->email);
             $stmt->bindValue(2, $user->plan);

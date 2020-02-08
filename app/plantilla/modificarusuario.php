@@ -15,6 +15,10 @@ if(isset($userid)){
 		<td>Identificador</td>
 		<td><input type="text" name="identificador" READONLY value="<?=$userid?>"></td>
 	</tr>
+    <tr>
+        <td>Nombre</td>
+        <td><input type="text" name="nombre" value="<?=$user[2]?>"></td>
+    </tr>
 		<tr>
 		<td>Correo electrónico</td>
 		<td><input type="text" name="correo" value="<?=$user[3]?>"></td>
@@ -46,7 +50,7 @@ if(isset($userid)){
 	 	<tr>
 		<td>Plan</td>
 		<td>
-			<select size="4" name="plan">
+			<select size="4" name="plan" onchange="confirmarModificar('<?= PLANES[$user[4]]?>');">
 				<?php
 					foreach(PLANES as $c => $v){
 						if($c == $user[4]){

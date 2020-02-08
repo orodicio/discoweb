@@ -33,6 +33,11 @@ function ctlUserInicio()
                         $_SESSION['modo'] = GESTIONUSUARIOS;
                         $msg = TMENSAJES['USERNOACTIVO'];
                         header("refresh:5; url=index.php?orden=Cerrar");
+                    } else if($estado == 'B'){
+                        $_SESSION['modo'] = GESTIONUSUARIOS;
+                        $msg = TMENSAJES['USERNOACTIVO'];
+                        header("refresh:5; url=index.php?orden=Cerrar");
+
                     } else {
                         $_SESSION['modo'] = GESTIONFICHEROS;
                         header('Location:index.php');
@@ -145,9 +150,9 @@ function ctlUserModificar()
         $clave1 = recoge('contrasenia');
         $clave2 = recoge('repcontrasenia');
         $email = recoge('correo');
-        $identificador = recoge('identificador');
+        $identificador = $user[0];
         $plan = recoge('plan');
-        $nombre = $user[2];
+        $nombre = recoge('nombre');
         $estado = recoge('estado');
 
         try {
@@ -156,18 +161,29 @@ function ctlUserModificar()
                 $existeMail = modeloUserDB::existeEmail($email);
                 checkExisteEmail($existeMail);
             }
+            if($user[4] != $plan && $_SESSION['tipouser'] != "Máster"){
+                $estado = "B";
+            }
             $user = new User($identificador, $clave1, $nombre, $email, $plan, $estado);
             $result = modeloUserDB::UserUpdate($user);
-            var_dump($result);
+
             if ($result) {
+                if($estado == "B"){
+                $msg = TMENSAJES['USERUPDATE'].'.'.TMENSAJES['USERNOACTIVO'];
+                }else{
                 $msg = TMENSAJES['USERUPDATE'];
+                }
             } else {
                 $msg = TMENSAJES['ERRORUPDATE'];
             }
             if($_SESSION['tipouser']=="Máster"){
             header('Location:index.php?orden=VerUsuarios&msg=' . $msg);
             }else{
+                if($estado == "B"){
+                    header('Location:index.php?orden=Cerrar');
+                }else{
                 header('Location:index.php?orden=cambiarModo&msg=' . $msg);
+            }
             }
         } catch (Exception $e) {
             $msg = $e->getMessage();
