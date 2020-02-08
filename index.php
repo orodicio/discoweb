@@ -28,7 +28,8 @@ $rutasFiles = [
     "Compartir" => "ctlFileCompartir",
     "Subir" => "ctlFileSubir",
     "Cerrar" => "ctlUserCerrar",
-    "cambiarModo"=> "cltUserCambiarModo"
+    "cambiarModo"=> "cltUserCambiarModo",
+    "Descargar" => "ctlFileDescargar"
 ];
 // Si no hay usuario a Inicio
 if (!isset($_SESSION['user'])) {

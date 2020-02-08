@@ -58,3 +58,22 @@ function ctlFileSubir(){
         }
          header('Location:index.php?orden2=VerArchivos&msg=' . $msg);
 }
+function ctlFileDescargar(){
+
+    //1.- COger la extension del fichero y meterla para el contenttype
+    //2.- Tabla en bbdd id title (nombre que viene del usuario) name (random id del fichero) idU
+    //redirigir
+
+    $archivo =$_GET['id'];
+    $directorio = RUTA_FICHEROS.'/'.$_SESSION['user'].'/'.$archivo;
+    if(!empty($archivo) && file_exists($directorio)){
+        header("Cache-Control: public");
+        header("Content-Description: File Transfer");
+        header("Content-Disposition: attachment; filename=$archivo");
+        header("Content-Transfer-Encoding: binary");
+        // Read the file
+        readfile($directorio);
+        return;
+    }
+
+}

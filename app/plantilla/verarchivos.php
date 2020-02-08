@@ -18,7 +18,7 @@ ob_start();
         </tr>
             <?php foreach($justFiles as $archivo) : ?>
         <tr>
-            <td> <a href="app/ficheros_usuarios/<?=$_SESSION['user'].'/'.$archivo?>" download="<?=$archivo?>"><?= $archivo ?></a></td>
+            <td> <a href="index.php?orden2=Descargar&id=<?= $archivo ?>"><?= $archivo ?></a></td>
             <td><?= mime_content_type(RUTA_FICHEROS.'/'.$_SESSION['user'].'/'.$archivo) ?></td>
             <td><?= filesize(RUTA_FICHEROS.'/'.$_SESSION['user'].'/'.$archivo).' bytes'?></td>
             <td><?= date("d/m/y H:i:s",filectime(RUTA_FICHEROS.'/'.$_SESSION['user'].'/'.$archivo))?></td>

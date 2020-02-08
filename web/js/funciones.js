@@ -83,9 +83,7 @@ function funcionesJquery() {
     $("#verArchivos a, #verUsuarios a").hover(entramouse, salemouse);
     $("input[type=text],input[type=password],input[type=email]").each(function() { $(this).hover(cambiaBorde, restauraBorde) });
     $("input[type=submit],button,input[type=button]").each(function() { $(this).hover(cambiarFondo, restaurarFondo) });
-
 }
-
 function enviarConEnter() {
     var key = e.which;
     if (key == 13) {
