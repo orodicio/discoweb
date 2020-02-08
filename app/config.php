@@ -3,7 +3,7 @@
 define ('GESTIONUSUARIOS','1');
 define ('GESTIONFICHEROS','2');
 // DATOS DE CONEXION
-define ('DBSERVER','192.168.1.46');
+define ('DBSERVER','192.168.1.134');
 define ('DBNAME','discoweb2' );
 define ('DBUSER','olalla');
 define ('DBPASSWORD','()L4ll4r0d1c10');

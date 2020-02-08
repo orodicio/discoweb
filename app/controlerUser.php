@@ -145,9 +145,9 @@ function ctlUserModificar()
         $clave1 = recoge('contrasenia');
         $clave2 = recoge('repcontrasenia');
         $email = recoge('correo');
-        $identificador = recoge('identificador');
+        $identificador = $user[0];
         $plan = recoge('plan');
-        $nombre = $user[2];
+        $nombre = recoge('nombre');
         $estado = recoge('estado');
 
         try {
@@ -155,6 +155,9 @@ function ctlUserModificar()
             if ($user[3] != $email) {
                 $existeMail = modeloUserDB::existeEmail($email);
                 checkExisteEmail($existeMail);
+            }
+            if($user[4] != $plan){
+
             }
             $user = new User($identificador, $clave1, $nombre, $email, $plan, $estado);
             $result = modeloUserDB::UserUpdate($user);
