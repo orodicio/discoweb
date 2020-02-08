@@ -12,7 +12,7 @@ function confirmarBorrar(nombre, id) {
 
 function confirmarBorrarArchivo(nombre) {
     if (confirm("¿Quieres eliminar el archivo:  " + nombre + "?")) {
-        document.location.href = "?orden2=Borrar";
+        document.location.href = "?orden2=Borrar&id="+nombre;
     }
 }
 
