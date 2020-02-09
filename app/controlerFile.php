@@ -69,14 +69,15 @@ function ctlFileSubir()
     header('Location:index.php?orden2=VerArchivos&msg=' . $msg);
 }
 
-function ctlFileDescargar()
+function ctlFileDescargar($archivo = null)
 {
 
     //1.- COger la extension del fichero y meterla para el contenttype
     //2.- Tabla en bbdd id title (nombre que viene del usuario) name (random id del fichero) idU
     //redirigir
-
+    if(empty($archivo)){
     $archivo = $_GET['id'];
+    }
     $directorio = RUTA_FICHEROS . '/' . $_SESSION['user'] . '/' . $archivo;
     if (!empty($archivo) && file_exists($directorio)) {
         header("Cache-Control: public");
@@ -115,5 +116,8 @@ function ctlFileRenombrar(){
         echo "No se ha podido modificar correctamente el fichero ". $nombreActual.". No exite en el directorio";
     }
 
-
+}
+function ctlFileCompartir(){
+    $nombre = ModeloFicherosDB::FileGetByNombre($_GET['id']);
+    ctlFileDescargar($nombre);
 }

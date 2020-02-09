@@ -67,6 +67,7 @@ function comprobarContrasenas(clave) {
     return true;
 }
 
+
 function validar() {
     var identificador = document.getElementById("identificador").value;
     var email = document.getElementById("email").value;
@@ -138,6 +139,11 @@ function funcionesJquery() {
     $('.borrar').on('click', function (event) {
         event.preventDefault();
         confirmarBorrarArchivo($(this));
+    })
+    $('.compartir').on('click', function (event) {
+        event.preventDefault();
+        mensaje = $(this).attr('href');
+        alert(mensaje);
     })
 }
 

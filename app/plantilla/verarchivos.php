@@ -27,7 +27,7 @@ ob_start();
                 <td><?= date("d/m/y H:i:s", filectime(RUTA_FICHEROS . '/' . $_SESSION['user'] . '/' .  $archivo["nombre"])) ?></td>
                 <td><a href="#" class="borrar operacion" data-id="<?=  $archivo["nombre"] ?>">Borrar</a></td>
                 <td><a href="#" class ="renombrar operacion" data-id="<?=  $archivo["nombre"] ?>">Renombrar</a></td>
-                <td><a href="<?= $auto ?>?orden2=Comparborrartir&id=<?=  $archivo["nombre"] ?>" class ="compartir operacion">Compartir</a></td>
+                <td><a href="<?= $_SERVER['HTTP_HOST'] . $auto ?>?orden2=Compartir&id=<?=  $archivo["hash"] ?>" class ="compartir operacion" >Compartir</a></td>
             </tr>
         <?php endforeach; ?>
     </table>

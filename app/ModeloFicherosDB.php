@@ -60,7 +60,6 @@ class ModeloFicherosDB
     }
     public static function FileGetAllByUser($usuario)
     {
-        $fileArray = [];
         $stmt = self::$dbh->prepare("select nombre, size, extension, hash  from ficheros where usuario = ?");
         $stmt->bindValue(1, $usuario);
         $stmt->execute();
@@ -77,6 +76,19 @@ class ModeloFicherosDB
     {
         self::$dbh = null;
     }
+
+    public static function FileGetByNombre($hash)
+    {
+        $stmt = self::$dbh->prepare("select nombre from ficheros where hash = ?");
+        $stmt->bindValue(1, $hash);
+        $stmt->execute();
+        if ($stmt->rowCount() > 0) {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $fila = $stmt->fetch();
+            return $fila['nombre'];
+        }
+
+}
 
 }
 
