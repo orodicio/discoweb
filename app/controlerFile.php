@@ -85,13 +85,18 @@ function ctlFileDescargar()
 
 function ctlFileBorrar()
 {
-    $archivo = $_GET['id'];
+    $archivo = $_POST['id'];
     $directorio = RUTA_FICHEROS . '/' . $_SESSION['user'] . '/' . $archivo ;
     if (!empty($archivo) && file_exists($directorio)) {
         unlink ($directorio);
-        $msg ="Archivo borrado correctamente";
+        echo "Archivo borrado correctamente";
     }else{
-        $msg ="No se ha podido borrar el archivo";
+        echo "No se ha podido borrar el archivo";
     }
-    header('Location:index.php?orden2=VerArchivos&msg=' . $msg);
+}
+function ctlFileRenombrar(){
+    $nombreActual =$_POST['actual'];
+    $nombreNuevo =$_POST['nuevo'];
+    //TODO CAMBIARIAMOS EL NOMBRE
+    echo "Se ha modificado el fichero " . $nombreActual . " a " . $nombreNuevo ." correctamente";
 }

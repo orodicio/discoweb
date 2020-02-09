@@ -10,10 +10,50 @@ function confirmarBorrar(nombre, id) {
     }
 }
 
-function confirmarBorrarArchivo(nombre) {
-    if (confirm("¿Quieres eliminar el archivo:  " + nombre + "?")) {
-        document.location.href = "?orden2=Borrar&id="+nombre;
+function confirmarBorrarArchivo(element) {
+    let id = element.data('id');
+    if (confirm("¿Quieres eliminar el archivo:  " + id + "?")) {
+        let datosPost = {
+            "id": id
+        };
+        $.post("index.php?orden2=Borrar", datosPost, function (respuestaServidor) {
+            $('#aviso b').html(respuestaServidor);
+            let tr = element.parent().parent();
+            let table = tr.parent();
+            tr.remove();
+            $('.operacion').css('display', 'none');
+            setTimeout(function () {
+                let msg = "";
+                console.info(table.find("tr"));
+                if (table.find("tr").length === 1) msg = "No tiene ningún fichero aún";
+                $('#aviso b').html(msg);
+                $('.operacion').css('display', 'block');
+            }, 5000);
+        });
     }
+}
+
+function nuevoNombre(elemento) {
+    nombre = prompt('Introduzca el nuevo nombre a asignar');
+    if (nombre == null) {
+        return;
+    }
+    while (nombre == "") {
+        alert("Debe introducir un nombre para su archivo");
+        nombre = prompt('Introduzca el nuevo nombre a asignar');
+    }
+    //Campos que mando por post
+    let datosPost = {
+        "actual": elemento.data('id'),
+        "nuevo": nombre
+    };
+
+    $.post("index.php?orden2=Renombrar", datosPost, function (respuestaServidor) {
+        $('#aviso b').html(respuestaServidor);
+        setTimeout(function () {
+            $('#aviso b').html("");
+        }, 5000);
+    });
 }
 
 function comprobarContrasenas(clave) {
@@ -66,10 +106,11 @@ function validar() {
     document.forms[0].submit(); //enviar datos al servidor
 }
 
-function confirmarModificar(plan){
-   alert('Si modifica su plan '+plan +' ,su usuario querará temporalmente bloqueado, a no ser que sea administrador');
+function confirmarModificar(plan) {
+    alert('Si modifica su plan ' + plan + ' ,su usuario querará temporalmente bloqueado, a no ser que sea administrador');
     return;
 }
+
 /*Funciones Jquery
 /*Funciones Jquery
 /*Funciones Jquery
@@ -81,9 +122,22 @@ function funcionesJquery() {
     $("#nota").mouseover(texto);
     $("#nota").mouseout(borrartexto);
     $("#verArchivos a, #verUsuarios a").hover(entramouse, salemouse);
-    $("input[type=text],input[type=password],input[type=email]").each(function() { $(this).hover(cambiaBorde, restauraBorde) });
-    $("input[type=submit],button,input[type=button]").each(function() { $(this).hover(cambiarFondo, restaurarFondo) });
+    $("input[type=text],input[type=password],input[type=email]").each(function () {
+        $(this).hover(cambiaBorde, restauraBorde)
+    });
+    $("input[type=submit],button,input[type=button]").each(function () {
+        $(this).hover(cambiarFondo, restaurarFondo)
+    });
+    $('.renombrar').on('click', function (event) {
+        event.preventDefault();
+        nuevoNombre($(this));
+    })
+    $('.borrar').on('click', function (event) {
+        event.preventDefault();
+        confirmarBorrarArchivo($(this));
+    })
 }
+
 function enviarConEnter() {
     var key = e.which;
     if (key == 13) {

@@ -17,15 +17,17 @@ ob_start();
             // Nombre archivo => tipo, fecha y tamaño
             ?>
         </tr>
-        <?php foreach ($justFiles as $archivo) : ?>
+
+        <?php
+        foreach ($justFiles as $archivo) : ?>
             <tr>
                 <td><a href="index.php?orden2=Descargar&id=<?= $archivo ?>"><?= $archivo ?></a></td>
                 <td><?= mime_content_type(RUTA_FICHEROS . '/' . $_SESSION['user'] . '/' . $archivo) ?></td>
                 <td><?= filesize(RUTA_FICHEROS . '/' . $_SESSION['user'] . '/' . $archivo) . ' bytes' ?></td>
                 <td><?= date("d/m/y H:i:s", filectime(RUTA_FICHEROS . '/' . $_SESSION['user'] . '/' . $archivo)) ?></td>
-                <td><a href="#" onclick="confirmarBorrarArchivo('<?= $archivo ?>');">Borrar</a></td>
-                <td><a href="<?= $auto ?>?orden2=Renombrar&id=<?= $archivo ?>">Renombrar</a></td>
-                <td><a href="<?= $auto ?>?orden2=Compartir&id=<?= $archivo ?>">Compartir</a></td>
+                <td><a href="#" class="borrar operacion" data-id="<?= $archivo ?>">Borrar</a></td>
+                <td><a href="#" class ="renombrar operacion" data-id="<?= $archivo ?>">Renombrar</a></td>
+                <td><a href="<?= $auto ?>?orden2=Comparborrartir&id=<?= $archivo ?>" class ="compartir operacion">Compartir</a></td>
             </tr>
         <?php endforeach; ?>
     </table>
