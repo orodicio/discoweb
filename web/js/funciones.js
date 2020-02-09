@@ -54,7 +54,7 @@ function nuevoNombre(elemento) {
         a.text(nombre);
         tr.find("a").first().text(nombre);
            setTimeout(function () {
-            $('#aviso b').html("");
+               window.location.reload();
         }, 5000);
     });
 }

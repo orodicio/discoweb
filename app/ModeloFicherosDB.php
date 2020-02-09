@@ -48,6 +48,17 @@ class ModeloFicherosDB
         $result = $stmt->execute();
         return $result;
     }
+    public static function FileUpdate($actual, $nuevo): bool
+    {
+        if (!empty($nuevo)){
+            $stmt = self::$dbh->prepare("update ficheros set nombre=? where nombre=?");
+            $stmt->bindValue(1, $nuevo);
+            $stmt->bindValue(2, $actual);
+            return $stmt->execute();
+        }
+
+        return false;
+    }
 
     // Añadir un nuevo usuario (boolean)
     public static function closeDB()

@@ -109,6 +109,7 @@ function ctlFileRenombrar(){
     $rutaNombreNuevo = RUTA_FICHEROS . '/' . $_SESSION['user'] . '/' . $nombreNuevo;
     if (!empty($nombreActual) && file_exists($rutaNombreActual)) {
         rename($rutaNombreActual, $rutaNombreNuevo);
+        ModeloFicherosDB::FileUpdate($nombreActual, $nombreNuevo);
         echo "Se ha modificado el fichero " . $nombreActual . " a " . $nombreNuevo ." correctamente";
     }else{
         echo "No se ha podido modificar correctamente el fichero ". $nombreActual.". No exite en el directorio";
