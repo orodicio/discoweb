@@ -15,7 +15,7 @@ function ctlFileVerArchivos()
         header('refresh:5; url=index.php?orden2=VerArchivos');
     }
     $directorio = RUTA_FICHEROS . '/' . $_SESSION['user'];
-    $justFiles = preg_grep('/^([^.])/', scandir($directorio));
+    $justFiles = ModeloFicherosDB::FileGetAllByUser($_SESSION['user']);
 
     if (empty($justFiles)) {
         $msg = "No tiene ningún fichero aún";

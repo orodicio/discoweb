@@ -21,13 +21,13 @@ ob_start();
         <?php
         foreach ($justFiles as $archivo) : ?>
             <tr>
-                <td><a href="index.php?orden2=Descargar&id=<?= $archivo ?>"><?= $archivo ?></a></td>
-                <td><?= mime_content_type(RUTA_FICHEROS . '/' . $_SESSION['user'] . '/' . $archivo) ?></td>
-                <td><?= filesize(RUTA_FICHEROS . '/' . $_SESSION['user'] . '/' . $archivo) . ' bytes' ?></td>
-                <td><?= date("d/m/y H:i:s", filectime(RUTA_FICHEROS . '/' . $_SESSION['user'] . '/' . $archivo)) ?></td>
-                <td><a href="#" class="borrar operacion" data-id="<?= $archivo ?>">Borrar</a></td>
-                <td><a href="#" class ="renombrar operacion" data-id="<?= $archivo ?>">Renombrar</a></td>
-                <td><a href="<?= $auto ?>?orden2=Comparborrartir&id=<?= $archivo ?>" class ="compartir operacion">Compartir</a></td>
+                <td><a href="index.php?orden2=Descargar&id=<?= $archivo["nombre"] ?>"><?= $archivo["nombre"] ?></a></td>
+                <td><?= mime_content_type(RUTA_FICHEROS . '/' . $_SESSION['user'] . '/' . $archivo["nombre"]) ?></td>
+                <td><?=$archivo['size']?></td>
+                <td><?= date("d/m/y H:i:s", filectime(RUTA_FICHEROS . '/' . $_SESSION['user'] . '/' .  $archivo["nombre"])) ?></td>
+                <td><a href="#" class="borrar operacion" data-id="<?=  $archivo["nombre"] ?>">Borrar</a></td>
+                <td><a href="#" class ="renombrar operacion" data-id="<?=  $archivo["nombre"] ?>">Renombrar</a></td>
+                <td><a href="<?= $auto ?>?orden2=Comparborrartir&id=<?=  $archivo["nombre"] ?>" class ="compartir operacion">Compartir</a></td>
             </tr>
         <?php endforeach; ?>
     </table>
