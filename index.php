@@ -7,6 +7,8 @@ include_once 'app/ModeloUserDB.php';
 // Inicializo el modelo
 
 modeloUserDB::Init();
+modeloFicherosDB::Init();
+
 // Enrutamiento
 // Relación entre peticiones y función que la va a tratar
 // Versión sin POO no manejo de Clases ni objetos

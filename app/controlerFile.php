@@ -59,7 +59,7 @@ function ctlFileSubir()
                 $extension = pathinfo($directorioSubida . '/' . $nombreFichero, PATHINFO_EXTENSION);
                 $hash = md5($nombreFichero);
                 $fichero = new Fichero($nombreFichero, $filesize, $extension,$hash);
-                modeloFicherosDB::Init();
+               // modeloFicherosDB::Init();
                 ModeloFicherosDB::FileAdd($fichero);
             }
         } else {
@@ -96,6 +96,7 @@ function ctlFileBorrar()
     $directorio = RUTA_FICHEROS . '/' . $_SESSION['user'] . '/' . $archivo ;
     if (!empty($archivo) && file_exists($directorio)) {
         unlink ($directorio);
+        ModeloFicherosDB::FileDel($archivo);
         echo "Archivo borrado correctamente";
     }else{
         echo "No se ha podido borrar el archivo";

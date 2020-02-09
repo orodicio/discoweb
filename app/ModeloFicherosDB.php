@@ -41,11 +41,20 @@ class ModeloFicherosDB
         $result = $stmt->execute();
         return $result;
     }
+    public static function FileDel($nombre)
+    {
+        $stmt = self::$dbh->prepare("Delete from ficheros where nombre = ?");
+        $stmt->bindValue(1, $nombre);
+        $result = $stmt->execute();
+        return $result;
+    }
+
     // Añadir un nuevo usuario (boolean)
     public static function closeDB()
     {
         self::$dbh = null;
     }
+
 }
 
 
