@@ -97,6 +97,14 @@ function ctlFileBorrar()
 function ctlFileRenombrar(){
     $nombreActual =$_POST['actual'];
     $nombreNuevo =$_POST['nuevo'];
-    //TODO CAMBIARIAMOS EL NOMBRE
-    echo "Se ha modificado el fichero " . $nombreActual . " a " . $nombreNuevo ." correctamente";
+    $rutaNombreActual =RUTA_FICHEROS . '/' . $_SESSION['user'] . '/'.$_POST['actual'];
+    $rutaNombreNuevo = RUTA_FICHEROS . '/' . $_SESSION['user'] . '/' . $nombreNuevo;
+    if (!empty($nombreActual) && file_exists($rutaNombreActual)) {
+        rename($rutaNombreActual, $rutaNombreNuevo);
+        echo "Se ha modificado el fichero " . $nombreActual . " a " . $nombreNuevo ." correctamente";
+    }else{
+        echo "No se ha podido modificar correctamente el fichero ". $nombreActual.". No exite en el directorio";
+    }
+
+
 }

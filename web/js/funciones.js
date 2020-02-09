@@ -24,7 +24,6 @@ function confirmarBorrarArchivo(element) {
             $('.operacion').css('display', 'none');
             setTimeout(function () {
                 let msg = "";
-                console.info(table.find("tr"));
                 if (table.find("tr").length === 1) msg = "No tiene ningún fichero aún";
                 $('#aviso b').html(msg);
                 $('.operacion').css('display', 'block');
@@ -50,7 +49,11 @@ function nuevoNombre(elemento) {
 
     $.post("index.php?orden2=Renombrar", datosPost, function (respuestaServidor) {
         $('#aviso b').html(respuestaServidor);
-        setTimeout(function () {
+        let tr =elemento.parent().parent();
+        let a =tr.find('a:first');
+        a.text(nombre);
+        tr.find("a").first().text(nombre);
+           setTimeout(function () {
             $('#aviso b').html("");
         }, 5000);
     });
