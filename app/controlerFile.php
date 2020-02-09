@@ -4,7 +4,8 @@
 // ---------------------------------------------------------------
 
 include_once 'config.php';
-
+include_once 'ModeloFicherosDB.php';
+include_once  'Fichero.php';
 
 // Muestro la tabla con los archivos
 function ctlFileVerArchivos()
@@ -54,6 +55,12 @@ function ctlFileSubir()
                 $msg .= 'ERROR: Archivo no guardado correctamente <br />';
             } else {
                 $msg .= 'Archivo guardado correctamente <br />';
+                $filesize = filesize($directorioSubida . '/' . $nombreFichero);
+                $extension = pathinfo($directorioSubida . '/' . $nombreFichero, PATHINFO_EXTENSION);
+                $hash = md5($nombreFichero);
+                $fichero = new Fichero($nombreFichero, $filesize, $extension,$hash);
+                modeloFicherosDB::Init();
+                ModeloFicherosDB::FileAdd($fichero);
             }
         } else {
             $msg .= 'ERROR: No es un directorio correcto o no se tiene permiso de escritura <br />';
