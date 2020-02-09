@@ -8,6 +8,7 @@ class Fichero
     private $size;
     private $extension;
     private $hash;
+    private $usuario;
 
     /**
      * User constructor.
@@ -17,12 +18,14 @@ class Fichero
     public function __construct($nombre,
                                 $size,
                                 $extension,
-                                $hash)
+                                $hash,
+                                $usuario)
     {
         $this->nombre= $nombre;
         $this->size =$size;
         $this->extension= $extension;
         $this->hash = $hash;
+        $this->usuario = $usuario;
     }
     public function __get($atributo){
         if(property_exists($this, $atributo)) {

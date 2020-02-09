@@ -58,7 +58,7 @@ function ctlFileSubir()
                 $filesize = filesize($directorioSubida . '/' . $nombreFichero);
                 $extension = pathinfo($directorioSubida . '/' . $nombreFichero, PATHINFO_EXTENSION);
                 $hash = md5($nombreFichero);
-                $fichero = new Fichero($nombreFichero, $filesize, $extension,$hash);
+                $fichero = new Fichero($nombreFichero, $filesize, $extension,$hash, $_SESSION['user']);
                // modeloFicherosDB::Init();
                 ModeloFicherosDB::FileAdd($fichero);
             }

@@ -10,8 +10,6 @@ class ModeloFicherosDB
      * @var PDO $dbh
      */
     private static $dbh = null;
-    private static $consulta_user = "Select * from Usuarios where id = ?";
-    private static $consulta_email = "Select id from Usuarios where email= ?";
 
 
     public static function init()
@@ -31,13 +29,14 @@ class ModeloFicherosDB
     }
 
 // Añadir un nuevo usuario (boolean)
-    public static function FileAdd($fichero): bool
+    public static function FileAdd(Fichero $fichero): bool
     {
-        $stmt = self::$dbh->prepare("Insert into ficheros (nombre, size, extension, hash) values (?,?,?,?)");
+        $stmt = self::$dbh->prepare("Insert into ficheros (nombre, size, extension, hash, usuario) values (?,?,?,?,?)");
         $stmt->bindValue(1, $fichero->nombre);
         $stmt->bindValue(2, $fichero->size);
         $stmt->bindValue(3, $fichero->extension);
         $stmt->bindValue(4, $fichero->hash);
+        $stmt->bindValue(5, $fichero->usuario);
         $result = $stmt->execute();
         return $result;
     }
@@ -58,6 +57,18 @@ class ModeloFicherosDB
         }
 
         return false;
+    }
+    public static function FileGetAll()
+    {
+        $fileArray = [];
+        $stmt = self::$dbh->prepare("select nombre, size, extension, hash, usuario  from ficheros ");
+        $stmt->execute();
+        if ($stmt->rowCount() > 0) {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll();
+        }
+
+        return null;
     }
 
     // Añadir un nuevo usuario (boolean)
