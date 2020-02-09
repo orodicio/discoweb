@@ -10,11 +10,6 @@ class Fichero
     private $hash;
     private $usuario;
 
-    /**
-     * User constructor.
-     * @param $email
-     * @throws Exception
-     */
     public function __construct($nombre,
                                 $size,
                                 $extension,
@@ -32,7 +27,6 @@ class Fichero
             return $this->$atributo;
         }
     }
-
 }
 
 

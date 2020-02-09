@@ -40,6 +40,7 @@ class ModeloFicherosDB
         $result = $stmt->execute();
         return $result;
     }
+
     public static function FileDel($nombre)
     {
         $stmt = self::$dbh->prepare("Delete from ficheros where nombre = ?");
@@ -47,9 +48,10 @@ class ModeloFicherosDB
         $result = $stmt->execute();
         return $result;
     }
+
     public static function FileUpdate($actual, $nuevo): bool
     {
-        if (!empty($nuevo)){
+        if (!empty($nuevo)) {
             $stmt = self::$dbh->prepare("update ficheros set nombre=? where nombre=?");
             $stmt->bindValue(1, $nuevo);
             $stmt->bindValue(2, $actual);
@@ -58,6 +60,7 @@ class ModeloFicherosDB
 
         return false;
     }
+
     public static function FileGetAllByUser($usuario)
     {
         $stmt = self::$dbh->prepare("select nombre, size, extension, hash  from ficheros where usuario = ?");
@@ -77,19 +80,16 @@ class ModeloFicherosDB
         self::$dbh = null;
     }
 
-    public static function FileGetByNombre($hash)
+    public static function FileGetByHash($hash)
     {
-        $stmt = self::$dbh->prepare("select nombre from ficheros where hash = ?");
+        $stmt = self::$dbh->prepare("select nombre, usuario from ficheros where hash = ?");
         $stmt->bindValue(1, $hash);
         $stmt->execute();
         if ($stmt->rowCount() > 0) {
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $fila = $stmt->fetch();
-            return $fila['nombre'];
+            return $stmt->fetch();
         }
-
-}
-
+    }
 }
 
 

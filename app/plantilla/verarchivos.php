@@ -12,13 +12,10 @@ ob_start();
             <th>Tamaño</th>
             <th>Fecha de creacion</th>
             <th colspan="3">Operaciones</th>
-            <?php
-            $auto = $_SERVER['PHP_SELF'];
-            // Nombre archivo => tipo, fecha y tamaño
-            ?>
         </tr>
 
         <?php
+        if(!empty($justFiles)){
         foreach ($justFiles as $archivo) : ?>
             <tr>
                 <td><a href="index.php?orden2=Descargar&id=<?= $archivo["nombre"] ?>"><?= $archivo["nombre"] ?></a></td>
@@ -27,9 +24,14 @@ ob_start();
                 <td><?= date("d/m/y H:i:s", filectime(RUTA_FICHEROS . '/' . $_SESSION['user'] . '/' .  $archivo["nombre"])) ?></td>
                 <td><a href="#" class="borrar operacion" data-id="<?=  $archivo["nombre"] ?>">Borrar</a></td>
                 <td><a href="#" class ="renombrar operacion" data-id="<?=  $archivo["nombre"] ?>">Renombrar</a></td>
-                <td><a href="<?= $_SERVER['HTTP_HOST'] . $auto ?>?orden2=Compartir&id=<?=  $archivo["hash"] ?>" class ="compartir operacion" >Compartir</a></td>
+                <td><a href="<?= $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']?>?orden2=Compartir&id=<?=  $archivo["hash"] ?>" class ="compartir operacion" >Compartir</a></td>
             </tr>
-        <?php endforeach; ?>
+        <?php endforeach;
+        }else{?>
+            <tr>
+                <td colspan="5" style="text-align: center;">No tiene ningún fichero aún</td>
+            </tr>
+            <?php }?>
     </table>
     <br>
     <form action='index.php' method="post">

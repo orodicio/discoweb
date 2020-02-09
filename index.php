@@ -45,7 +45,11 @@ if (!isset($_SESSION['user'])) {
                 '</p></body></html>';
             exit;
         }
-    } else {
+    } else if(isset($_GET['orden2']) && $_GET['orden2'] == 'Compartir') {
+        ctlFileCompartir();
+        exit;
+    }
+    else {
         $procRuta = "ctlUserInicio";
     }
 } else {

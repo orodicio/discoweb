@@ -51,12 +51,13 @@ function ctlFileSubir()
         // si es un directorio y tengo permisos
         if (is_dir($directorioSubida) && is_writable($directorioSubida)) {
             //Intento mover el archivo temporal al directorio indicado
-            if (!move_uploaded_file($temporalFichero, $directorioSubida . '/' . $nombreFichero)) {
+            $path = $directorioSubida . '/' . $nombreFichero;
+            if (!move_uploaded_file($temporalFichero, $path)) {
                 $msg .= 'ERROR: Archivo no guardado correctamente <br />';
             } else {
                 $msg .= 'Archivo guardado correctamente <br />';
-                $filesize = filesize($directorioSubida . '/' . $nombreFichero);
-                $extension = pathinfo($directorioSubida . '/' . $nombreFichero, PATHINFO_EXTENSION);
+                $filesize = filesize($path);
+                $extension = pathinfo($path, PATHINFO_EXTENSION);
                 $hash = md5($nombreFichero);
                 $fichero = new Fichero($nombreFichero, $filesize, $extension,$hash, $_SESSION['user']);
                // modeloFicherosDB::Init();
@@ -69,16 +70,22 @@ function ctlFileSubir()
     header('Location:index.php?orden2=VerArchivos&msg=' . $msg);
 }
 
-function ctlFileDescargar($archivo = null)
+function ctlFileDescargar($resultDesdeCompartir = null)
 {
 
     //1.- COger la extension del fichero y meterla para el contenttype
     //2.- Tabla en bbdd id title (nombre que viene del usuario) name (random id del fichero) idU
     //redirigir
-    if(empty($archivo)){
-    $archivo = $_GET['id'];
+
+    if(empty($resultDesdeCompartir)){
+        $archivo = $_GET['id'];
+        $usuario = $_SESSION['user'];
+    } else {
+        $archivo = $resultDesdeCompartir['nombre'];
+        $usuario = $resultDesdeCompartir['usuario'];
     }
-    $directorio = RUTA_FICHEROS . '/' . $_SESSION['user'] . '/' . $archivo;
+
+    $directorio = RUTA_FICHEROS . '/' . $usuario . '/' . $archivo;
     if (!empty($archivo) && file_exists($directorio)) {
         header("Cache-Control: public");
         header("Content-Description: File Transfer");
@@ -118,6 +125,6 @@ function ctlFileRenombrar(){
 
 }
 function ctlFileCompartir(){
-    $nombre = ModeloFicherosDB::FileGetByNombre($_GET['id']);
-    ctlFileDescargar($nombre);
+    $result = ModeloFicherosDB::FileGetByHash($_GET['id']);
+    ctlFileDescargar($result);
 }
