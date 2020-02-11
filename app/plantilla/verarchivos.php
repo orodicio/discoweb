@@ -2,32 +2,36 @@
 ob_start();
 //tabla para ver los archivos y subir nuevos archivos de los usuarios
 ?>
-    <div id='aviso'><b><?= (isset($msg))?$msg:"" ?></b></div>
-<br>
-    <div id="tituloTabla"><h2>Ficheros del Usuario: <?=$_SESSION['user']?></h2></div>
+    <div id='aviso'><b><?= (isset($msg)) ? $msg : "" ?></b></div>
+    <br>
+    <div id="tituloTabla"><h2>Ficheros del Usuario: <?= $_SESSION['user'] ?></h2></div>
     <table id="verArchivos">
-        <tr><th>Nombre</th>
+        <tr>
+            <th>Nombre</th>
             <th>Tipo</th>
             <th>Tamaño</th>
             <th>Fecha de creacion</th>
             <th colspan="3">Operaciones</th>
-            <?php
-            $auto = $_SERVER['PHP_SELF'];
-            // Nombre archivo => tipo, fecha y tamaño
-            ?>
         </tr>
-            <?php foreach($justFiles as $archivo) : ?>
-        <tr>
-            <td> <a href="app/ficheros_usuarios/<?=$_SESSION['user'].'/'.$archivo?>" download="<?=$archivo?>"><?= $archivo ?></a></td>
-            <td><?= mime_content_type(RUTA_FICHEROS.'/'.$_SESSION['user'].'/'.$archivo) ?></td>
-            <td><?= filesize(RUTA_FICHEROS.'/'.$_SESSION['user'].'/'.$archivo).' bytes'?></td>
-            <td><?= date("d/m/y H:i:s",filectime(RUTA_FICHEROS.'/'.$_SESSION['user'].'/'.$archivo))?></td>
-            <td><a href="#"
-                   onclick="confirmarBorrarArchivo('<?= $archivo?>);">Borrar</a></td>
-            <td><a href="<?= $auto?>?orden2=Renombrar&id=<?= $archivo ?>">Renombrar</a></td>
-            <td><a href="<?= $auto?>?orden2=Compartir&id=<?= $archivo?>">Compartir</a></td>
-        </tr>
-        <?php endforeach; ?>
+
+        <?php
+        if(!empty($justFiles)){
+        foreach ($justFiles as $archivo) : ?>
+            <tr>
+                <td><a href="index.php?orden2=Descargar&id=<?= $archivo["nombre"] ?>"><?= $archivo["nombre"] ?></a></td>
+                <td><?= mime_content_type(RUTA_FICHEROS . '/' . $_SESSION['user'] . '/' . $archivo["nombre"]) ?></td>
+                <td><?=$archivo['size']?></td>
+                <td><?= date("d/m/y H:i:s", filectime(RUTA_FICHEROS . '/' . $_SESSION['user'] . '/' .  $archivo["nombre"])) ?></td>
+                <td><a href="#" class="borrar operacion" data-id="<?=  $archivo["nombre"] ?>">Borrar</a></td>
+                <td><a href="#" class ="renombrar operacion" data-id="<?=  $archivo["nombre"] ?>">Renombrar</a></td>
+                <td><a href="<?= $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']?>?orden2=Compartir&id=<?=  $archivo["hash"] ?>" class ="compartir operacion" >Compartir</a></td>
+            </tr>
+        <?php endforeach;
+        }else{?>
+            <tr>
+                <td colspan="5" style="text-align: center;">No tiene ningún fichero aún</td>
+            </tr>
+            <?php }?>
     </table>
     <br>
     <form action='index.php' method="post">
@@ -38,11 +42,12 @@ ob_start();
     <button id="mostrar">Subir Fichero...</button>
     <br><br>
     <div id="subida">
-    <form name="f1" enctype="multipart/form-data" action="index.php?orden2=Subir" method="post">
-    <!--<input type="hidden" name="MAX_FILE_SIZE" value="100000" />  100Kbytes -->
-    <label>Elija el archivo a subir</label><br> <input name="archivo1" type="file" required="required" class="letraPeque"/> <br /><br>
-    <input type="submit" value="Subir archivo" />
-    </form>
+        <form name="f1" enctype="multipart/form-data" action="index.php?orden2=Subir" method="post">
+            <input type="hidden" name="MAX_FILE_SIZE" value="<?=TAMMAXIMOFILE?>" />
+            <label>Elija el archivo a subir</label><br> <input name="archivo1" type="file" required="required"
+                                                               class="letraPeque"/> <br/><br>
+            <input type="submit" value="Subir archivo"/>
+        </form>
     </div>
 <?php
 // Vacio el bufer y lo copio a contenido

@@ -33,6 +33,11 @@ function ctlUserInicio()
                         $_SESSION['modo'] = GESTIONUSUARIOS;
                         $msg = TMENSAJES['USERNOACTIVO'];
                         header("refresh:5; url=index.php?orden=Cerrar");
+                    } else if($estado == 'B'){
+                        $_SESSION['modo'] = GESTIONUSUARIOS;
+                        $msg = TMENSAJES['USERNOACTIVO'];
+                        header("refresh:5; url=index.php?orden=Cerrar");
+
                     } else {
                         $_SESSION['modo'] = GESTIONFICHEROS;
                         header('Location:index.php');
@@ -114,7 +119,14 @@ function ctlUserDetalles()
 {
     if (!empty($_GET['id'])) {
         $user = $_GET['id'];
-        $tablaAmostrar = modeloUserDB::UserGet($user);
+        //TODO como mejora, sacar los datos en una consulta (join usuarios con ficheros)
+        $tablaAmostrar = ModeloUserDB::UserGet($user);
+        $sizeUserFiles = ModeloFicherosDB::FileGetAllSizeByUser($user);
+        $numFiles = ModeloFicherosDB::FileGetAllNumbereByUser($user);
+        array_push($tablaAmostrar, $numFiles['total_ficheros']);
+        array_push($tablaAmostrar, round(($sizeUserFiles["suma_total"]/(1024*1024))));
+
+
     } else {
         $msg = "[ERROR] FALLO DE ENVÍO";
     }
@@ -145,9 +157,9 @@ function ctlUserModificar()
         $clave1 = recoge('contrasenia');
         $clave2 = recoge('repcontrasenia');
         $email = recoge('correo');
-        $identificador = recoge('identificador');
+        $identificador = $user[0];
         $plan = recoge('plan');
-        $nombre = $user[2];
+        $nombre = recoge('nombre');
         $estado = recoge('estado');
 
         try {
@@ -156,18 +168,29 @@ function ctlUserModificar()
                 $existeMail = modeloUserDB::existeEmail($email);
                 checkExisteEmail($existeMail);
             }
+            if($user[4] != $plan && $_SESSION['tipouser'] != "Máster"){
+                $estado = "B";
+            }
             $user = new User($identificador, $clave1, $nombre, $email, $plan, $estado);
             $result = modeloUserDB::UserUpdate($user);
-            var_dump($result);
+
             if ($result) {
+                if($estado == "B"){
+                $msg = TMENSAJES['USERUPDATE'].'.'.TMENSAJES['USERNOACTIVO'];
+                }else{
                 $msg = TMENSAJES['USERUPDATE'];
+                }
             } else {
                 $msg = TMENSAJES['ERRORUPDATE'];
             }
             if($_SESSION['tipouser']=="Máster"){
             header('Location:index.php?orden=VerUsuarios&msg=' . $msg);
             }else{
+                if($estado == "B"){
+                    header('Location:index.php?orden=Cerrar');
+                }else{
                 header('Location:index.php?orden=cambiarModo&msg=' . $msg);
+            }
             }
         } catch (Exception $e) {
             $msg = $e->getMessage();
@@ -181,10 +204,11 @@ function ctlUserModificar()
  */
 function cltUserCambiarModo()
 {
-    if ($_SESSION['modo'] == GESTIONUSUARIOS && $_SESSION['tipouser']=="Máster") {
+    $modoMaster = "Máster";
+    if ($_SESSION['modo'] == GESTIONUSUARIOS && $_SESSION['tipouser']== $modoMaster) {
         $_SESSION['modo'] = GESTIONFICHEROS;
         header('Location:index.php');
-    } else if($_SESSION['modo'] == GESTIONUSUARIOS && $_SESSION['tipouser']!="Máster"){
+    } else if($_SESSION['modo'] == GESTIONUSUARIOS && $_SESSION['tipouser']!= $modoMaster){
         $msg = $_GET['msg'];
         $_SESSION['modo'] = GESTIONFICHEROS;
         header('Location:index.php?msg=' . $msg);

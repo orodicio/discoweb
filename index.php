@@ -7,6 +7,7 @@ include_once 'app/ModeloUserDB.php';
 // Inicializo el modelo
 
 modeloUserDB::Init();
+modeloFicherosDB::Init();
 
 // Enrutamiento
 // Relación entre peticiones y función que la va a tratar
@@ -28,7 +29,8 @@ $rutasFiles = [
     "Compartir" => "ctlFileCompartir",
     "Subir" => "ctlFileSubir",
     "Cerrar" => "ctlUserCerrar",
-    "cambiarModo"=> "cltUserCambiarModo"
+    "cambiarModo"=> "cltUserCambiarModo",
+    "Descargar" => "ctlFileDescargar"
 ];
 // Si no hay usuario a Inicio
 if (!isset($_SESSION['user'])) {
@@ -43,7 +45,11 @@ if (!isset($_SESSION['user'])) {
                 '</p></body></html>';
             exit;
         }
-    } else {
+    } else if(isset($_GET['orden2']) && $_GET['orden2'] == 'Compartir') {
+        ctlFileCompartir();
+        exit;
+    }
+    else {
         $procRuta = "ctlUserInicio";
     }
 } else {
