@@ -119,7 +119,14 @@ function ctlUserDetalles()
 {
     if (!empty($_GET['id'])) {
         $user = $_GET['id'];
-        $tablaAmostrar = modeloUserDB::UserGet($user);
+        //TODO como mejora, sacar los datos en una consulta (join usuarios con ficheros)
+        $tablaAmostrar = ModeloUserDB::UserGet($user);
+        $sizeUserFiles = ModeloFicherosDB::FileGetAllSizeByUser($user);
+        $numFiles = ModeloFicherosDB::FileGetAllNumbereByUser($user);
+        array_push($tablaAmostrar, $numFiles['total_ficheros']);
+        array_push($tablaAmostrar, round(($sizeUserFiles["suma_total"]/(1024*1024))));
+
+
     } else {
         $msg = "[ERROR] FALLO DE ENVÍO";
     }
@@ -197,10 +204,11 @@ function ctlUserModificar()
  */
 function cltUserCambiarModo()
 {
-    if ($_SESSION['modo'] == GESTIONUSUARIOS && $_SESSION['tipouser']=="Máster") {
+    $modoMaster = "Máster";
+    if ($_SESSION['modo'] == GESTIONUSUARIOS && $_SESSION['tipouser']== $modoMaster) {
         $_SESSION['modo'] = GESTIONFICHEROS;
         header('Location:index.php');
-    } else if($_SESSION['modo'] == GESTIONUSUARIOS && $_SESSION['tipouser']!="Máster"){
+    } else if($_SESSION['modo'] == GESTIONUSUARIOS && $_SESSION['tipouser']!= $modoMaster){
         $msg = $_GET['msg'];
         $_SESSION['modo'] = GESTIONFICHEROS;
         header('Location:index.php?msg=' . $msg);

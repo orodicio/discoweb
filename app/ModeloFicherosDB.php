@@ -63,7 +63,7 @@ class ModeloFicherosDB
 
     public static function FileGetAllByUser($usuario)
     {
-        $stmt = self::$dbh->prepare("select nombre, size, extension, hash  from ficheros where usuario = ?");
+        $stmt = self::$dbh->prepare("select nombre, size, extension, hash from ficheros where usuario = ?");
         $stmt->bindValue(1, $usuario);
         $stmt->execute();
         if ($stmt->rowCount() > 0) {
@@ -89,6 +89,28 @@ class ModeloFicherosDB
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             return $stmt->fetch();
         }
+    }
+
+    public static function FileGetAllSizeByUser($usuario) {
+        $stmt = self::$dbh->prepare("select sum(size) as suma_total from ficheros where usuario = ? group by usuario");
+        $stmt->bindValue(1, $usuario);
+        $stmt->execute();
+        if ($stmt->rowCount() > 0) {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetch();
+        }
+
+        return null;
+    }
+    public static function FileGetAllNumbereByUser($usuario) {
+        $stmt = self::$dbh->prepare("select count(*) as total_ficheros from ficheros where usuario= ?");
+        $stmt->bindValue(1, $usuario);
+        $stmt->execute();
+        if ($stmt->rowCount() > 0) {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetch();
+        }
+        return null;
     }
 }
 

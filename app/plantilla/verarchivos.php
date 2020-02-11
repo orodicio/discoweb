@@ -43,7 +43,7 @@ ob_start();
     <br><br>
     <div id="subida">
         <form name="f1" enctype="multipart/form-data" action="index.php?orden2=Subir" method="post">
-            <!--<input type="hidden" name="MAX_FILE_SIZE" value="100000" />  100Kbytes -->
+            <input type="hidden" name="MAX_FILE_SIZE" value="<?=TAMMAXIMOFILE?>" />
             <label>Elija el archivo a subir</label><br> <input name="archivo1" type="file" required="required"
                                                                class="letraPeque"/> <br/><br>
             <input type="submit" value="Subir archivo"/>

@@ -5,7 +5,7 @@
 
 include_once 'config.php';
 include_once 'ModeloFicherosDB.php';
-include_once  'Fichero.php';
+include_once 'Fichero.php';
 
 // Muestro la tabla con los archivos
 function ctlFileVerArchivos()
@@ -17,10 +17,6 @@ function ctlFileVerArchivos()
     $directorio = RUTA_FICHEROS . '/' . $_SESSION['user'];
     $justFiles = ModeloFicherosDB::FileGetAllByUser($_SESSION['user']);
 
-    if (empty($justFiles)) {
-        $msg = "No tiene ningún fichero aún";
-
-    }
     include_once 'plantilla/verarchivos.php';
 }
 
@@ -34,16 +30,34 @@ function ctlFileSubir()
         4 => 'No se seleccionó ningún archivo para ser subido',
         6 => 'No existe un directorio temporal donde subir el archivo',
         7 => 'No se pudo guardar el archivo en disco',  // permisos
-        8 => 'Una extensión PHP evito la subida del archivo'  // extensión PHP
+        8 => 'Una extensión PHP evito la subida del archivo', // extensión PHP
+        9 => 'Su plan no admite que guarde tantos ficheros o ha excedido el número de megas contratados'
     ];
-
-    $directorioSubida = RUTA_FICHEROS . '/' . $_SESSION['user'];
-    $temporalFichero = $_FILES['archivo1']['tmp_name'];
-    $errorFichero = $_FILES['archivo1']['error'];
-    $nombreFichero = $_FILES['archivo1']['name'];
-    $msg = "";
-
-    // Obtengo el código de error de la operación, 0 si todo ha ido bien
+    $errorFichero = 3;
+    if (isset($_FILES) && !empty($_FILES)) {
+        $directorioSubida = RUTA_FICHEROS . '/' . $_SESSION['user'];
+        $temporalFichero = $_FILES['archivo1']['tmp_name'];
+        $errorFichero = $_FILES['archivo1']['error'];
+        $nombreFichero = $_FILES['archivo1']['name'];
+        $tamanioFichero = $_FILES['archivo1']['size'];
+        $msg = "";
+        //Comprobamos si podemos subir por peso total de ficheros, por tamaño del fichero subido y por numero de ficheros
+        if ($tamanioFichero > TAMMAXIMOFILE) {
+            $errorFichero = 2;
+        }
+        if ($_SESSION['tipouser'] != "Máster") {
+            $numMaxArchivos = hallarNumeroMaximoArchivos($_SESSION['tipouser']);
+            $tamMaxFicheros = hallarTamMaximoFicheros($_SESSION['tipouser']);
+            $totalArchivosSubidos = ModeloFicherosDB::FileGetAllNumbereByUser($_SESSION['user']);
+            $totalArchivosSubidosFinal = $totalArchivosSubidos['total_ficheros'];
+            $totalPesoCarpeta = ModeloFicherosDB::FileGetAllSizeByUser($_SESSION['user']);
+            $totalPesoCarpetaFinal = $totalPesoCarpeta['suma_total'];
+            if ($totalArchivosSubidosFinal + 1 > $numMaxArchivos || $totalPesoCarpetaFinal + $tamanioFichero > $tamMaxFicheros) {
+                $errorFichero = 9;
+            }
+        }
+    }
+    // Obtengo el código de error de la operación, 0 si ha ido bien
     if ($errorFichero > 0) {
         $msg .= "Se ha producido el error: $errorFichero:"
             . $codigosErrorSubida[$errorFichero] . ' <br />';
@@ -59,8 +73,8 @@ function ctlFileSubir()
                 $filesize = filesize($path);
                 $extension = pathinfo($path, PATHINFO_EXTENSION);
                 $hash = md5($nombreFichero);
-                $fichero = new Fichero($nombreFichero, $filesize, $extension,$hash, $_SESSION['user']);
-               // modeloFicherosDB::Init();
+                $fichero = new Fichero($nombreFichero, $filesize, $extension, $hash, $_SESSION['user']);
+                // modeloFicherosDB::Init();
                 ModeloFicherosDB::FileAdd($fichero);
             }
         } else {
@@ -77,7 +91,7 @@ function ctlFileDescargar($resultDesdeCompartir = null)
     //2.- Tabla en bbdd id title (nombre que viene del usuario) name (random id del fichero) idU
     //redirigir
 
-    if(empty($resultDesdeCompartir)){
+    if (empty($resultDesdeCompartir)) {
         $archivo = $_GET['id'];
         $usuario = $_SESSION['user'];
     } else {
@@ -101,30 +115,68 @@ function ctlFileDescargar($resultDesdeCompartir = null)
 function ctlFileBorrar()
 {
     $archivo = $_POST['id'];
-    $directorio = RUTA_FICHEROS . '/' . $_SESSION['user'] . '/' . $archivo ;
+    $directorio = RUTA_FICHEROS . '/' . $_SESSION['user'] . '/' . $archivo;
     if (!empty($archivo) && file_exists($directorio)) {
-        unlink ($directorio);
+        unlink($directorio);
         ModeloFicherosDB::FileDel($archivo);
         echo "Archivo borrado correctamente";
-    }else{
+    } else {
         echo "No se ha podido borrar el archivo";
     }
 }
-function ctlFileRenombrar(){
-    $nombreActual =$_POST['actual'];
-    $nombreNuevo =$_POST['nuevo'];
-    $rutaNombreActual =RUTA_FICHEROS . '/' . $_SESSION['user'] . '/'.$_POST['actual'];
+
+function ctlFileRenombrar()
+{
+    $nombreActual = $_POST['actual'];
+    $nombreNuevo = $_POST['nuevo'];
+    $rutaNombreActual = RUTA_FICHEROS . '/' . $_SESSION['user'] . '/' . $_POST['actual'];
     $rutaNombreNuevo = RUTA_FICHEROS . '/' . $_SESSION['user'] . '/' . $nombreNuevo;
     if (!empty($nombreActual) && file_exists($rutaNombreActual)) {
         rename($rutaNombreActual, $rutaNombreNuevo);
         ModeloFicherosDB::FileUpdate($nombreActual, $nombreNuevo);
-        echo "Se ha modificado el fichero " . $nombreActual . " a " . $nombreNuevo ." correctamente";
-    }else{
-        echo "No se ha podido modificar correctamente el fichero ". $nombreActual.". No exite en el directorio";
+        echo "Se ha modificado el fichero " . $nombreActual . " a " . $nombreNuevo . " correctamente";
+    } else {
+        echo "No se ha podido modificar correctamente el fichero " . $nombreActual . ". No exite en el directorio";
     }
 
 }
-function ctlFileCompartir(){
+
+function ctlFileCompartir()
+{
     $result = ModeloFicherosDB::FileGetByHash($_GET['id']);
     ctlFileDescargar($result);
+}
+
+
+//funciones auxiliares
+function hallarNumeroMaximoArchivos($tipouser)
+{
+    switch ($tipouser) {
+        case 'Básico':
+            $numeroMaximoArchivos = LIMITE_FICHEROS[0];
+            break;
+        case 'Profesional':
+            $numeroMaximoArchivos = LIMITE_FICHEROS[1];
+            break;
+        case 'Premium':
+            $numeroMaximoArchivos = LIMITE_FICHEROS[2];
+            break;
+    }
+    return $numeroMaximoArchivos;
+}
+
+function hallarTamMaximoFicheros($tipouser)
+{
+    switch ($tipouser) {
+        case 'Básico':
+            $tamMaxArchivos = LIMITE_ESPACIO[0];
+            break;
+        case 'Profesional':
+            $tamMaxArchivos = LIMITE_ESPACIO[1];
+            break;
+        case 'Premium':
+            $tamMaxArchivos = LIMITE_ESPACIO[2];
+            break;
+    }
+    return $tamMaxArchivos;
 }
