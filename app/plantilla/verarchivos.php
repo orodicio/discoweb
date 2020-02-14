@@ -19,9 +19,9 @@ ob_start();
         foreach ($justFiles as $archivo) : ?>
             <tr>
                 <td><a href="index.php?orden2=Descargar&id=<?= $archivo["nombre"] ?>"><?= $archivo["nombre"] ?></a></td>
-                <td><?= mime_content_type(RUTA_FICHEROS . '/' . $_SESSION['user'] . '/' . $archivo["nombre"]) ?></td>
+                <td><?= mime_content_type($directorio. '/' . $archivo["nombre"]) ?></td>
                 <td><?=$archivo['size']?></td>
-                <td><?= date("d/m/y H:i:s", filectime(RUTA_FICHEROS . '/' . $_SESSION['user'] . '/' .  $archivo["nombre"])) ?></td>
+                <td><?= date("d/m/y H:i:s", filectime($directorio . '/' .  $archivo["nombre"])) ?></td>
                 <td><a href="#" class="borrar operacion" data-id="<?=  $archivo["nombre"] ?>">Borrar</a></td>
                 <td><a href="#" class ="renombrar operacion" data-id="<?=  $archivo["nombre"] ?>">Renombrar</a></td>
                 <td><a href="<?= $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']?>?orden2=Compartir&id=<?=  $archivo["hash"] ?>" class ="compartir operacion" >Compartir</a></td>

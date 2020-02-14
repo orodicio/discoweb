@@ -53,8 +53,10 @@ function nuevoNombre(elemento) {
         let a =tr.find('a:first');
         a.text(nombre);
         tr.find("a").first().text(nombre);
+        $('.operacion').css('display', 'none');
            setTimeout(function () {
                window.location.reload();
+               $('.operacion').css('display', 'block');
         }, 5000);
     });
 }
@@ -147,7 +149,7 @@ function funcionesJquery() {
     })
 }
 
-function enviarConEnter() {
+function enviarConEnter(e) {
     var key = e.which;
     if (key == 13) {
         $(".enterForm").submit();
