@@ -14,7 +14,7 @@ ob_start();
     <p>Tipo de plan: <?=PLANES[$tablaAmostrar[4]]?></p>
     <p>Estado <?=ESTADOS[$tablaAmostrar[5]]?></p>
     <p>Número de ficheros: <?=$tablaAmostrar[6]?></p>
-    <p>Espacio ocupado:: <?=$tablaAmostrar[7]?> MB</p>
+    <p>Espacio ocupado: <?=$tablaAmostrar[7]?> MB</p>
 <form method="get" action="index.php?orden=VerUsuarios">
     <input type="submit" value="volver">
 </form>
