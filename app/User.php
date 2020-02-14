@@ -1,6 +1,7 @@
 <?php
 
 include_once 'config.php';
+
 class User
 {
     private $id;
@@ -25,16 +26,21 @@ class User
         $this->id = $id;
         $this->checkId();
         $this->clave = $clave;
-        if(!empty($this->clave)){$this->checkClave();$this->cifrarClave();}
+        if (!empty($this->clave)) {
+            $this->checkClave();
+            $this->cifrarClave();
+        }
         $this->email = $email;
         $this->checkEmail();
-        $this->nombre= $nombre;
-        $this->plan =$plan;
-        $this->estado= $estado;
+        $this->nombre = $nombre;
+        $this->plan = $plan;
+        $this->estado = $estado;
 
     }
-    public function __get($atributo){
-        if(property_exists($this, $atributo)) {
+
+    public function __get($atributo)
+    {
+        if (property_exists($this, $atributo)) {
             return $this->$atributo;
         }
     }
@@ -55,11 +61,13 @@ class User
 
     private function checkClave()
     {
-        if (preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&()=])([A-Za-z\d$@$!%*?&()=]|[^ ]){8,15}$/", $this->clave)==0) {
+        if (preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&()=])([A-Za-z\d$@$!%*?&()=]|[^ ]){8,15}$/", $this->clave) == 0) {
             throw new \Exception(TMENSAJES['PASSEASY']);
         }
     }
-    private function cifrarClave(){
+
+    private function cifrarClave()
+    {
         return $this->clave = Cifrador::cifrar($this->clave);
     }
 }

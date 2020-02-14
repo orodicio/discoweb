@@ -91,7 +91,8 @@ class ModeloFicherosDB
         }
     }
 
-    public static function FileGetAllSizeByUser($usuario) {
+    public static function FileGetAllSizeByUser($usuario)
+    {
         $stmt = self::$dbh->prepare("select sum(size) as suma_total from ficheros where usuario = ? group by usuario");
         $stmt->bindValue(1, $usuario);
         $stmt->execute();
@@ -102,7 +103,9 @@ class ModeloFicherosDB
 
         return null;
     }
-    public static function FileGetAllNumbereByUser($usuario) {
+
+    public static function FileGetAllNumbereByUser($usuario)
+    {
         $stmt = self::$dbh->prepare("select count(*) as total_ficheros from ficheros where usuario= ?");
         $stmt->bindValue(1, $usuario);
         $stmt->execute();

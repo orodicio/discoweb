@@ -15,7 +15,7 @@ function ctlFileVerArchivos()
         header('refresh:5; url=index.php?orden2=VerArchivos');
     }
     $directorio = RUTA_FICHEROS . '/' . $_SESSION['user'];
-    if(!is_dir($directorio)){
+    if (!is_dir($directorio)) {
         mkdir(RUTA_FICHEROS . '/' . $_SESSION['user'], 0777);
     }
     $justFiles = ModeloFicherosDB::FileGetAllByUser($_SESSION['user']);

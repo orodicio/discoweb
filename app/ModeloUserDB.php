@@ -128,7 +128,7 @@ class ModeloUserDB
 // Actualizar un nuevo usuario (boolean)
     public static function UserUpdate($user): bool
     {
-        $clave=$user->clave;
+        $clave = $user->clave;
         if (empty($clave)) {
             $stmt = self::$dbh->prepare("update Usuarios set email=?, plan=?, estado=? where id=?");
             $stmt->bindValue(1, $user->email);

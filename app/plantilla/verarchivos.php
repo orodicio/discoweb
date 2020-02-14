@@ -15,23 +15,27 @@ ob_start();
         </tr>
 
         <?php
-        if(!empty($justFiles)){
-        foreach ($justFiles as $archivo) : ?>
-            <tr>
-                <td><a href="index.php?orden2=Descargar&id=<?= $archivo["nombre"] ?>"><?= $archivo["nombre"] ?></a></td>
-                <td><?= mime_content_type($directorio. '/' . $archivo["nombre"]) ?></td>
-                <td><?=$archivo['size']?></td>
-                <td><?= date("d/m/y H:i:s", filectime($directorio . '/' .  $archivo["nombre"])) ?></td>
-                <td><a href="#" class="borrar operacion" data-id="<?=  $archivo["nombre"] ?>">Borrar</a></td>
-                <td><a href="#" class ="renombrar operacion" data-id="<?=  $archivo["nombre"] ?>">Renombrar</a></td>
-                <td><a href="<?= $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']?>?orden2=Compartir&id=<?=  $archivo["hash"] ?>" class ="compartir operacion" >Compartir</a></td>
-            </tr>
-        <?php endforeach;
-        }else{?>
+        if (!empty($justFiles)) {
+            foreach ($justFiles as $archivo) : ?>
+                <tr>
+                    <td><a href="index.php?orden2=Descargar&id=<?= $archivo["nombre"] ?>"><?= $archivo["nombre"] ?></a>
+                    </td>
+                    <td><?= mime_content_type($directorio . '/' . $archivo["nombre"]) ?></td>
+                    <td><?= $archivo['size'] ?></td>
+                    <td><?= date("d/m/y H:i:s", filectime($directorio . '/' . $archivo["nombre"])) ?></td>
+                    <td><a href="#" class="borrar operacion" data-id="<?= $archivo["nombre"] ?>">Borrar</a></td>
+                    <td><a href="#" class="renombrar operacion" data-id="<?= $archivo["nombre"] ?>">Renombrar</a></td>
+                    <td>
+                        <a href="<?= $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] ?>?orden2=Compartir&id=<?= $archivo["hash"] ?>"
+                           class="compartir operacion">Compartir</a></td>
+                </tr>
+            <?php endforeach;
+        } else {
+            ?>
             <tr>
                 <td colspan="5" style="text-align: center;">No tiene ningún fichero aún</td>
             </tr>
-            <?php }?>
+        <?php } ?>
     </table>
     <br>
     <form action='index.php' method="post">
@@ -43,7 +47,7 @@ ob_start();
     <br><br>
     <div id="subida">
         <form name="f1" enctype="multipart/form-data" action="index.php?orden2=Subir" method="post">
-            <input type="hidden" name="MAX_FILE_SIZE" value="<?=TAMMAXIMOFILE?>" />
+            <input type="hidden" name="MAX_FILE_SIZE" value="<?= TAMMAXIMOFILE ?>"/>
             <label>Elija el archivo a subir</label><br> <input name="archivo1" type="file" required="required"
                                                                class="letraPeque"/> <br/><br>
             <input type="submit" value="Subir archivo"/>

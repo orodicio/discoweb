@@ -1,6 +1,7 @@
 <?php
 
 include_once 'config.php';
+
 class Fichero
 {
     private $id;
@@ -16,14 +17,16 @@ class Fichero
                                 $hash,
                                 $usuario)
     {
-        $this->nombre= $nombre;
-        $this->size =$size;
-        $this->extension= $extension;
+        $this->nombre = $nombre;
+        $this->size = $size;
+        $this->extension = $extension;
         $this->hash = $hash;
         $this->usuario = $usuario;
     }
-    public function __get($atributo){
-        if(property_exists($this, $atributo)) {
+
+    public function __get($atributo)
+    {
+        if (property_exists($this, $atributo)) {
             return $this->$atributo;
         }
     }
