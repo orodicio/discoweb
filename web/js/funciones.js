@@ -49,14 +49,14 @@ function nuevoNombre(elemento) {
 
     $.post("index.php?orden2=Renombrar", datosPost, function (respuestaServidor) {
         $('#aviso b').html(respuestaServidor);
-        let tr =elemento.parent().parent();
-        let a =tr.find('a:first');
+        let tr = elemento.parent().parent();
+        let a = tr.find('a:first');
         a.text(nombre);
         tr.find("a").first().text(nombre);
         $('.operacion').css('display', 'none');
-           setTimeout(function () {
-               window.location.reload();
-               $('.operacion').css('display', 'block');
+        setTimeout(function () {
+            window.location.reload();
+            $('.operacion').css('display', 'block');
         }, 5000);
     });
 }

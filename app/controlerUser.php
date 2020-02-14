@@ -33,7 +33,7 @@ function ctlUserInicio()
                         $_SESSION['modo'] = GESTIONUSUARIOS;
                         $msg = TMENSAJES['USERNOACTIVO'];
                         header("refresh:5; url=index.php?orden=Cerrar");
-                    } else if($estado == 'B'){
+                    } else if ($estado == 'B') {
                         $_SESSION['modo'] = GESTIONUSUARIOS;
                         $msg = TMENSAJES['USERNOACTIVO'];
                         header("refresh:5; url=index.php?orden=Cerrar");
@@ -124,7 +124,7 @@ function ctlUserDetalles()
         $sizeUserFiles = ModeloFicherosDB::FileGetAllSizeByUser($user);
         $numFiles = ModeloFicherosDB::FileGetAllNumbereByUser($user);
         array_push($tablaAmostrar, $numFiles['total_ficheros']);
-        array_push($tablaAmostrar, round(($sizeUserFiles["suma_total"]/(1024*1024))));
+        array_push($tablaAmostrar, round(($sizeUserFiles["suma_total"] / (1024 * 1024))));
 
 
     } else {
@@ -153,7 +153,7 @@ function ctlUserModificar()
     if ($_SERVER['REQUEST_METHOD'] == "GET") {
         include_once 'plantilla/modificarusuario.php';
     } else {
-        $user =modeloUserDB::UserGet($_GET['id']);
+        $user = modeloUserDB::UserGet($_GET['id']);
         $clave1 = recoge('contrasenia');
         $clave2 = recoge('repcontrasenia');
         $email = recoge('correo');
@@ -168,29 +168,29 @@ function ctlUserModificar()
                 $existeMail = modeloUserDB::existeEmail($email);
                 checkExisteEmail($existeMail);
             }
-            if($user[4] != $plan && $_SESSION['tipouser'] != "Máster"){
+            if ($user[4] != $plan && $_SESSION['tipouser'] != "Máster") {
                 $estado = "B";
             }
             $user = new User($identificador, $clave1, $nombre, $email, $plan, $estado);
             $result = modeloUserDB::UserUpdate($user);
 
             if ($result) {
-                if($estado == "B"){
-                $msg = TMENSAJES['USERUPDATE'].'.'.TMENSAJES['USERNOACTIVO'];
-                }else{
-                $msg = TMENSAJES['USERUPDATE'];
+                if ($estado == "B") {
+                    $msg = TMENSAJES['USERUPDATE'] . '.' . TMENSAJES['USERNOACTIVO'];
+                } else {
+                    $msg = TMENSAJES['USERUPDATE'];
                 }
             } else {
                 $msg = TMENSAJES['ERRORUPDATE'];
             }
-            if($_SESSION['tipouser']=="Máster"){
-            header('Location:index.php?orden=VerUsuarios&msg=' . $msg);
-            }else{
-                if($estado == "B"){
+            if ($_SESSION['tipouser'] == "Máster") {
+                header('Location:index.php?orden=VerUsuarios&msg=' . $msg);
+            } else {
+                if ($estado == "B") {
                     header('Location:index.php?orden=Cerrar');
-                }else{
-                header('Location:index.php?orden=cambiarModo&msg=' . $msg);
-            }
+                } else {
+                    header('Location:index.php?orden=cambiarModo&msg=' . $msg);
+                }
             }
         } catch (Exception $e) {
             $msg = $e->getMessage();
@@ -205,14 +205,14 @@ function ctlUserModificar()
 function cltUserCambiarModo()
 {
     $modoMaster = "Máster";
-    if ($_SESSION['modo'] == GESTIONUSUARIOS && $_SESSION['tipouser']== $modoMaster) {
+    if ($_SESSION['modo'] == GESTIONUSUARIOS && $_SESSION['tipouser'] == $modoMaster) {
         $_SESSION['modo'] = GESTIONFICHEROS;
         header('Location:index.php');
-    } else if($_SESSION['modo'] == GESTIONUSUARIOS && $_SESSION['tipouser']!= $modoMaster){
+    } else if ($_SESSION['modo'] == GESTIONUSUARIOS && $_SESSION['tipouser'] != $modoMaster) {
         $msg = $_GET['msg'];
         $_SESSION['modo'] = GESTIONFICHEROS;
         header('Location:index.php?msg=' . $msg);
-    }else{
+    } else {
         $_SESSION['modo'] = GESTIONUSUARIOS;
         $id = $_SESSION['user'];
         header('Location:index.php?orden=Modificar&id=' . $id);
