@@ -13,8 +13,13 @@ ob_start();
     <p>Correo electrónico: <?= $tablaAmostrar[3] ?></p>
     <p>Tipo de plan: <?= PLANES[$tablaAmostrar[4]] ?></p>
     <p>Estado <?= ESTADOS[$tablaAmostrar[5]] ?></p>
-    <p>Número de ficheros: <?= $tablaAmostrar[6] ?></p>
-    <p>Espacio ocupado: <?= $tablaAmostrar[7] ?> MB</p>
+    <p>Número de
+        ficheros: <?= $tablaAmostrar[6] ?> <?= ($tablaAmostrar[4] != 3) ? "/" . LIMITE_FICHEROS[$tablaAmostrar[4]] : "" ?>
+        <?= ($tablaAmostrar[4] != 3) ? "(" . number_format(($tablaAmostrar[6] / LIMITE_FICHEROS[$tablaAmostrar[4]]) * 100, 2) . "%)" : "" ?></p>
+    <p>Espacio ocupado: <?= $tablaAmostrar[7] ?>
+        MB <?= ($tablaAmostrar[4] != 3) ? "/" . number_format((LIMITE_ESPACIO[$tablaAmostrar[4]] / (1024 * 1024)), 2) . " MB" : "" ?>
+        <?= ($tablaAmostrar[4] != 3) ? "(" . number_format(($tablaAmostrar[7] / number_format((LIMITE_ESPACIO[$tablaAmostrar[4]] / (1024 * 1024)), 2)) * 100, 2) . "%)" : "" ?>
+    </p>
     <form method="get" action="index.php?orden=VerUsuarios">
         <input type="submit" value="volver">
     </form>
