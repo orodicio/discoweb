@@ -5,6 +5,16 @@ ob_start();
     <div id='aviso'><b><?= (isset($msg)) ? $msg : "" ?></b></div>
     <br>
     <div id="tituloTabla"><h2>Ficheros del Usuario: <?= $_SESSION['user'] ?></h2></div>
+<?php if (!empty($justFiles)) { ?>
+    <div id="info">
+    <h3>Número de
+        ficheros: <?= count($justFiles) ?><?= (obtieneNumeroPlan($_SESSION['tipouser']) != 3) ? "/" . LIMITE_FICHEROS[obtieneNumeroPlan($_SESSION['tipouser'])] : "" ?></h3>
+    <h3>
+        Espacio: <?= number_format((ModeloFicherosDB::FileGetAllSizeByUser($_SESSION['user'])["suma_total"]) / (1024 * 1024), 2) . "MB" ?>
+        <?= (obtieneNumeroPlan($_SESSION['tipouser']) != 3) ? "/" . number_format((LIMITE_ESPACIO[obtieneNumeroPlan($_SESSION['tipouser'])]) / (1024 * 1024), 2) . "MB" : "" ?>
+    </h3>
+<?php } ?>
+    </div>
     <table id="verArchivos">
         <tr>
             <th>Nombre</th>

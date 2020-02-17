@@ -124,8 +124,7 @@ function ctlUserDetalles()
         $sizeUserFiles = ModeloFicherosDB::FileGetAllSizeByUser($user);
         $numFiles = ModeloFicherosDB::FileGetAllNumbereByUser($user);
         array_push($tablaAmostrar, $numFiles['total_ficheros']);
-        array_push($tablaAmostrar, round(($sizeUserFiles["suma_total"] / (1024 * 1024))));
-
+        array_push($tablaAmostrar, number_format(($sizeUserFiles["suma_total"] / (1024 * 1024)), 2));
 
     } else {
         $msg = "[ERROR] FALLO DE ENVÍO";
@@ -274,5 +273,25 @@ function checkEmpty(string $clave1, string $email, string $identificador, string
 {
     if (empty($clave1) || empty($email) || empty($identificador) || empty($nombre)) {
         throw new \Exception(TMENSAJES['NOVACIO']);
+    }
+}
+
+function obtieneNumeroPlan($nombrePlan)
+{
+    switch ($nombrePlan) {
+        case "Básico":
+            return 0;
+            break;
+        case "Profesional":
+            return 1;
+            break;
+        case "Premium":
+            return 2;
+            break;
+        case "Máster":
+            return 3;
+            break;
+        default:
+            return -1;
     }
 }

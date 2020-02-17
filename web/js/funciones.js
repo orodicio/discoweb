@@ -24,7 +24,10 @@ function confirmarBorrarArchivo(element) {
             $('.operacion').css('display', 'none');
             setTimeout(function () {
                 let msg = "";
-                if (table.find("tr").length === 1) msg = "No tiene ningún fichero aún";
+                if (table.find("tr").length === 1){
+                    msg = "No tiene ningún fichero aún";
+                    $('#info').css('display', 'none');
+                }
                 $('#aviso b').html(msg);
                 $('.operacion').css('display', 'block');
             }, 5000);
